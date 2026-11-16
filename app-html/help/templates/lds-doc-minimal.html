@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제목을 여기에 — 한 줄</title>
+<!-- ① 필수: 목록·검색이 이 블록을 읽는다. id = 파일 이름(확장자 빼고) -->
+<script type="application/json" id="doc-meta">{
+  "schema": "lds/1.0",
+  "id": "data-semantic-knowledge-graph-example-topic",
+  "title": "제목을 여기에 — 한 줄",
+  "summary": "이 자료가 무엇을 가르치는지 한두 문장.",
+  "domain": "data", "track": "semantic", "topic": "knowledge-graph",
+  "level": "beginner",
+  "minutes": 20,
+  "tags": ["example", "template"],
+  "status": "draft",
+  "updated": "2026-09-29"
+}</script>
+<!-- ② 테마·읽기 배치 선적용(앱 뷰어와 새 탭 모두) -->
+<script>
+(function () { var r = document.documentElement;
+  try { var t = JSON.parse(localStorage.getItem('lds:theme')); if (t === 'light' || t === 'dark') r.setAttribute('data-theme', t); } catch (e) {}
+  try { var L = JSON.parse(localStorage.getItem('lds:layout')) || {};
+        var AX = { toc: ['left','right','top','hidden'], width: ['narrow','default','wide','full'], header: ['static','sticky','rail'] };
+        for (var k in AX) if (AX[k].indexOf(L[k]) >= 0) r.setAttribute('data-' + k, L[k]); } catch (e) {}
+})();
+</script>
+<style>
+/* 색은 여기 두 블록에서만 정의하고 본문은 var(--…) 로만 쓴다 */
+:root { --bg:#ffffff; --fg:#1a2233; --muted:#5b6478; --line:#dfe4ee; --accent:#2563eb; --card:#f6f8fc; --ok:#15803d; --warn:#b45309;
+        --measure: 74ch; --toc-w: 230px; }
+:root[data-theme="dark"] { --bg:#0f1420; --fg:#e6ebf5; --muted:#9aa6bd; --line:#27324a; --accent:#60a5fa; --card:#151c2c; --ok:#4ade80; --warn:#fbbf24; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) { --bg:#0f1420; --fg:#e6ebf5; --muted:#9aa6bd; --line:#27324a; --accent:#60a5fa; --card:#151c2c; } }
+:root[data-width="narrow"] { --measure: 62ch; } :root[data-width="wide"] { --measure: 96ch; } :root[data-width="full"] { --measure: none; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.75 "Pretendard", "Malgun Gothic", system-ui, sans-serif; }
+.shell { display: grid; grid-template-columns: var(--toc-w) minmax(0, 1fr); gap: 28px; max-width: 1200px; margin: 0 auto; padding: 28px 20px 80px; }
+:root[data-toc="right"] .shell { grid-template-columns: minmax(0, 1fr) var(--toc-w); } :root[data-toc="right"] .toc { order: 2; }
+:root[data-toc="top"] .shell, :root[data-toc="hidden"] .shell { grid-template-columns: minmax(0, 1fr); }
+:root[data-toc="hidden"] .toc { display: none; }
+:root[data-header="sticky"] header.doc { position: sticky; top: 0; background: var(--bg); z-index: 5; }
+main { max-width: var(--measure); min-width: 0; }
+.toc { position: sticky; top: 16px; align-self: start; font-size: 14px; border-left: 2px solid var(--line); padding-left: 12px; }
+.toc a { color: var(--muted); text-decoration: none; display: block; padding: 2px 0; }
+.toc a:hover { color: var(--accent); }
+h1 { font-size: 30px; line-height: 1.3; margin: 0 0 8px; } h2 { margin-top: 44px; border-bottom: 1px solid var(--line); padding-bottom: 6px; } h3 { margin-top: 28px; }
+.crumb { color: var(--muted); font-size: 13px; } .lead { color: var(--muted); font-size: 17px; }
+.chip { display: inline-block; font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; margin-right: 4px; color: var(--muted); }
+.note { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 16px; margin: 16px 0; }
+.note.warn { border-left-color: var(--warn); }
+dl.terms dt { font-weight: 700; margin-top: 10px; } dl.terms dd { margin: 2px 0 0 0; color: var(--fg); }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 15px; } th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; } th { background: var(--card); }
+code { background: var(--card); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; font-size: 14px; }
+pre { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; overflow: auto; }
+.quiz li { margin: 10px 0; } .quiz details { margin-top: 6px; color: var(--ok); }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="toc" aria-label="목차">
+    <b>목차</b>
+    <a href="#s1">1. 핵심 개념</a>
+    <a href="#s2">2. 규칙과 예시</a>
+    <a href="#s3">3. 자주 하는 실수</a>
+    <a href="#quiz">4. 연습문제</a>
+    <a href="#sum">5. 정리</a>
+  </nav>
+  <main>
+    <header class="doc">
+      <p class="crumb">데이터·AI › 시맨틱 › 지식그래프</p>
+      <h1>제목을 여기에 — 한 줄</h1>
+      <p class="lead">이 자료가 무엇을 가르치는지 한두 문장.</p>
+      <p><span class="chip">입문</span><span class="chip">약 20분</span><span class="chip">#example</span></p>
+    </header>
+
+    <section id="s1">
+      <h2>1. 핵심 개념</h2>
+      <p>개념을 한 문단으로 정의합니다. <b>정의 → 왜 중요한가</b> 순서로.</p>
+      <dl class="terms">
+        <dt>용어 A</dt><dd>한 줄 정의.</dd>
+        <dt>용어 B</dt><dd>한 줄 정의.</dd>
+      </dl>
+    </section>
+
+    <section id="s2">
+      <h2>2. 규칙과 예시</h2>
+      <h3>규칙 1 — 이름</h3>
+      <p>규칙 설명.</p>
+      <div class="note"><b>예시</b> — 규칙이 적용되는 짧은 예.</div>
+      <table><thead><tr><th>상황</th><th>쓰는 것</th><th>이유</th></tr></thead>
+        <tbody><tr><td>…</td><td>…</td><td>…</td></tr></tbody></table>
+    </section>
+
+    <section id="s3">
+      <h2>3. 자주 하는 실수</h2>
+      <div class="note warn"><b>함정</b> — 헷갈리는 지점과 구별하는 요령.</div>
+    </section>
+
+    <section id="quiz">
+      <h2>4. 연습문제</h2>
+      <ol class="quiz">
+        <li>문제 문장 ______ 빈칸.
+          <br>(A) 보기1 (B) 보기2 (C) 보기3 (D) 보기4
+          <details><summary>정답·해설</summary>정답 (B). 이유를 한두 문장.</details></li>
+      </ol>
+    </section>
+
+    <section id="sum">
+      <h2>5. 정리</h2>
+      <ul><li>꼭 기억할 것 1</li><li>꼭 기억할 것 2</li></ul>
+    </section>
+  </main>
+</div>
+</body>
+</html>

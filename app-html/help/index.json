@@ -1,0 +1,39 @@
+{
+ "kind": "study.help",
+ "version": 1,
+ "_note": "도움말 목차. 파일은 이 폴더의 .md — 앱 [도움말] 메뉴가 읽는다. 새 가이드는 파일을 만들고 여기에 한 줄 추가.",
+ "groups": [
+  {
+   "title": "시작하기",
+   "items": [
+    { "id": "start", "title": "처음 오셨나요 — 메뉴 지도" },
+    { "id": "faq", "title": "자주 묻는 질문 · 문제 해결" }
+   ]
+  },
+  {
+   "title": "연구지원",
+   "items": [
+    { "id": "research", "title": "🔬 연구지원 — PDF 올려 AI 와 읽고 문서 만들기 · 저장소" }
+   ]
+  },
+  {
+   "title": "자료 학습",
+   "items": [
+    { "id": "library", "title": "📚 학습 자료 읽기" },
+    { "id": "authoring", "title": "학습 자료 만들기 · 등록" }
+   ]
+  },
+  {
+   "title": "설정 · 관리",
+   "items": [
+    { "id": "settings", "title": "설정" },
+    { "id": "ai", "title": "AI 연결" },
+    { "id": "admin", "title": "관리자" },
+    { "id": "server", "title": "🖥 서버 · 계정 보안 · 로그" },
+    { "id": "data-management", "title": "데이터 관리 · 백업" },
+    { "id": "deploy", "title": "배포" },
+    { "id": "dev", "title": "개발자" }
+   ]
+  }
+ ]
+}

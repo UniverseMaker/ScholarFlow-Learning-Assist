@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ScholarFlow API</title>
+<script src="ui/rui-theme.js?v=db9539abb3"></script>
+<link rel="stylesheet" href="ui/rui-tokens.css?v=1b8fe8a7ca">
+<link rel="stylesheet" href="ui/rui.css?v=e25746554d">
+<style>
+  .rui .page { max-width: 960px; }
+  section.panel { margin-bottom: 16px; }
+  .panel p { padding: 0 16px 12px; color: var(--rui-ink-2); font-size: 13.5px; }
+  .panel p:first-of-type { padding-top: 12px; }
+  code { font-size: 12.5px; color: var(--rui-accent-text); }
+  td code { white-space: nowrap; }
+</style>
+</head>
+<body class="rui">
+<div class="page">
+  <header class="page-head"><div><h1>ScholarFlow API</h1><p>다른 시스템이 쓰는 공개 경로. 기본 주소 <code>http://127.0.0.1:18162</code></p></div></header>
+
+  <section class="panel"><div class="panel-head"><h2>인증</h2></div><div class="table-wrap"><table>
+    <thead><tr><th>경로</th><th>인증</th><th>조건</th></tr></thead><tbody>
+    <tr><td><code>/v1/*</code></td><td><code>Authorization: Bearer slc_…</code></td><td>이 PC 안에서만. 터널·브라우저 요청 거절. 게이트웨이가 꺼지면 503</td></tr>
+    <tr><td><code>/hub/*</code></td><td>경로마다 다름</td><td>info 외 터널 거절. 게이트웨이와 무관</td></tr>
+    <tr><td><code>/api.php?r=</code></td><td>세션 쿠키</td><td>브라우저 앱 전용. 다른 시스템은 쓰지 않습니다</td></tr>
+  </tbody></table></div></section>
+
+  <section class="panel"><div class="panel-head"><h2>서비스 API</h2></div><div class="table-wrap"><table>
+    <thead><tr><th>메서드</th><th>경로</th><th>설명</th></tr></thead><tbody>
+    <tr><td>GET</td><td><code>/v1/models</code></td><td>토큰 주인이 고른 AI 연결의 모델</td></tr>
+    <tr><td>POST</td><td><code>/v1/chat/completions</code></td><td>OpenAI 호환 대화. stream 지원</td></tr>
+    <tr><td>GET</td><td><code>/v1/projects</code></td><td><code>{ok,data:[{pid,name,rndId,url}]}</code></td></tr>
+    <tr><td>GET</td><td><code>/v1/search?pid=&amp;q=</code></td><td><code>{ok,data:[{text,source,page,url}]}</code></td></tr>
+  </tbody></table></div></section>
+
+  <section class="panel"><div class="panel-head"><h2>계정 연동 hub-link/1</h2></div><div class="table-wrap"><table>
+    <thead><tr><th>인증</th><th>op</th><th>설명</th></tr></thead><tbody>
+    <tr><td>없음</td><td><code>info</code></td><td>형식·시스템·이름·주소</td></tr>
+    <tr><td>세션</td><td><code>links start unlink tickets menus</code></td><td>연결 목록·시작·해제·표 발급·다른 시스템 메뉴</td></tr>
+    <tr><td>세션·승인</td><td><code>authorize approve</code></td><td>사용자가 연결을 승인하는 화면</td></tr>
+    <tr><td>코드</td><td><code>callback exchange</code></td><td>승인 뒤 서버끼리 비밀값·토큰 교환</td></tr>
+    <tr><td>서명</td><td><code>revoke logout menu</code></td><td><code>X-Hub-Link</code> <code>X-Hub-Ts</code> <code>X-Hub-Sig</code></td></tr>
+    <tr><td>표</td><td><code>enter</code></td><td>자동 로그인. 폼 ticket, rui, silent</td></tr>
+    <tr><td>slc_ 토큰</td><td><code>events?since=</code></td><td><code>{ok,data:[{seq,at,kind,action,id,title,actor}],meta:{nextSince}}</code></td></tr>
+  </tbody></table></div></section>
+
+  <section class="panel"><div class="panel-head"><h2>바로 가기 주소</h2></div><div class="table-wrap"><table>
+    <thead><tr><th>주소</th><th>화면</th></tr></thead><tbody>
+    <tr><td><code>#/p/&lt;pid&gt;</code></td><td>연구 프로젝트</td></tr>
+    <tr><td><code>#/p/&lt;pid&gt;/info</code></td><td>프로젝트 정보</td></tr>
+    <tr><td><code>#/p/&lt;pid&gt;/report/&lt;did&gt;</code></td><td>보고서</td></tr>
+    <tr><td><code>#/p/&lt;pid&gt;/paper</code>, <code>/slides</code></td><td>논문, 발표자료</td></tr>
+    <tr><td><code>#/p/&lt;pid&gt;/src/&lt;fid&gt;/&lt;쪽&gt;</code></td><td>자료의 해당 쪽</td></tr>
+    <tr><td><code>#/&lt;화면 키&gt;</code></td><td>메뉴 화면(ui/menu.json 의 key)</td></tr>
+  </tbody></table></div></section>
+
+  <section class="panel"><div class="panel-head"><h2>쓰기 원칙</h2></div><p>서비스 토큰으로 무인 쓰기를 하지 않습니다. 다른 시스템의 데이터를 바꾸는 쓰기는 화면의 확인 창을 거칩니다.</p></section>
+</div>
+<script>/* (v152, G18) 공용 새 버전 알림 — 이 화면을 연 때의 운영 버전과 견준다 */
+fetch("/version.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j&&j.version&&window.RUI&&RUI.updates)RUI.updates({version:j.version})}).catch(function(){});</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+ScholarFlow Use-Only License, Version 1.0
+Copyright (c) 2026 UniverseMaker. All rights reserved.
+
+This software and its documentation (the "Software") are made publicly
+available for USE ONLY, under the terms below. The Software is
+source-available; it is NOT open source.
+
+1. Permitted use
+   You may, free of charge, download, install, and run unmodified copies of
+   the Software for personal, educational, research, or internal
+   organizational purposes, and use its output (documents, reports, slides,
+   notes, and other content you create with it) without restriction.
+
+2. Restrictions
+   Without prior written permission from the copyright holder, you may NOT:
+   a) modify, translate, adapt, or create derivative works of the Software
+      or any part of it (configuration through the Software's own settings
+      screens is not a modification);
+   b) copy, publish, redistribute, mirror, sell, rent, lease, or sublicense
+      the Software or any part of it, in source or compiled form, whether
+      or not modified;
+   c) offer the Software, or any service substantially based on it, to third
+      parties as a hosted, managed, or SaaS service;
+   d) incorporate the Software or any part of it into another product;
+   e) remove, alter, or obscure any copyright, license, or attribution notice.
+
+3. Forks on GitHub
+   Forking this repository through GitHub's fork function is allowed only to
+   the extent required by GitHub's Terms of Service. A fork may not be
+   modified and redistributed, and grants no rights beyond this License.
+
+4. Contributions
+   Bug reports and suggestions through GitHub Issues are welcome. Pull
+   requests are accepted only by prior agreement; by submitting a
+   contribution you grant the copyright holder a perpetual, worldwide,
+   royalty-free right to use it in the Software under any terms.
+
+5. Third-party components
+   Bundled third-party components (for example, fonts and libraries) remain
+   under their own licenses, which prevail for those components.
+
+6. Termination
+   Any breach of this License terminates your rights under it immediately.
+   On termination you must stop using and delete all copies of the Software.
+
+7. No warranty; limitation of liability
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A
+   PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT
+   HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM,
+   OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+For permissions beyond this License, open an issue on the repository.
+
+-----------------------------------------------------------------------------
+[한국어 안내 — 법적 효력은 위 영문이 우선합니다]
+
+ScholarFlow 사용 전용 라이선스 1.0
+
+1. 허용: 수정하지 않은 소프트웨어를 개인·교육·연구·기관 내부 용도로 무료로
+   내려받아 설치·실행할 수 있고, 이 소프트웨어로 만든 결과물(문서·보고서·
+   발표자료·노트 등)은 자유롭게 쓸 수 있습니다.
+2. 금지(저작권자의 서면 허락 없이): 수정·번역·2차 저작물 작성, 복제·공개·
+   재배포·판매·대여·재허락, 제3자 대상 호스팅·SaaS 제공, 다른 제품에 포함,
+   저작권·라이선스 표시 삭제·변경.
+3. GitHub 포크는 GitHub 이용약관이 요구하는 범위에서만 허용되며, 포크를 고쳐
+   다시 배포할 수 없습니다.
+4. 이슈 제보는 환영합니다. 풀 리퀘스트는 사전 합의 후에만 받습니다.
+5. 함께 들어 있는 외부 구성요소(글꼴·라이브러리)는 각자의 라이선스를 따릅니다.
+6. 위반하면 권리가 즉시 끝나며, 모든 사본을 지워야 합니다.
+7. 소프트웨어는 있는 그대로 제공되며, 어떠한 보증이나 책임도 지지 않습니다.

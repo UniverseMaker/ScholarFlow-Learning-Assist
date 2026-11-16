@@ -1,0 +1,359 @@
+/* rui-map.css — 이 앱의 CSS 를 research-ui 토큰에 잇는 층 (v119).
+   전부 html[data-app-theme="rui"] 아래에 둔다. 이전 테마에서는 이 파일 자체가 꺼진다(media="not all").
+   색은 --rui-* 토큰만 쓴다. */
+
+/* ---- 1. 앱 변수 → rui 토큰 ---- */
+html[data-app-theme="rui"][data-theme][data-mode] {
+  --bg: var(--rui-bg); --surface: var(--rui-surface); --surface-2: var(--rui-sunken);
+  --ink: var(--rui-ink); --muted: var(--rui-ink-2); --line: var(--rui-line);
+  --accent: var(--rui-accent); --accent-strong: var(--rui-accent-text); --accent-weak: var(--rui-accent-soft); --on-accent: var(--rui-accent-ink);
+  --sidebar-bg: var(--rui-side); --sidebar-ink: var(--rui-ink-2); --topbar-bg: var(--rui-bg);
+  --correct: var(--rui-ok); --correct-bg: var(--rui-ok-soft);
+  --wrong: var(--rui-bad); --wrong-bg: var(--rui-bad-soft);
+  --warn: var(--rui-warn); --warn-bg: var(--rui-warn-soft);
+  --bar-ink: var(--rui-ink); --bar-muted: var(--rui-ink-2); --bar-active: var(--rui-accent-text); --bar-hover: var(--rui-hover);
+  --shadow: none; --shadow-lg: 0 8px 24px rgba(0, 0, 0, .16);
+  --radius: var(--rui-r-lg); --radius-sm: var(--rui-r); --radius-lg: var(--rui-r-lg); --nav-radius: var(--rm-r);
+  --pad-card: 20px; --gap: 16px; --card-accent-border: 0px;
+  --ring: 0 0 0 2px var(--rui-accent);
+  --scroll-thumb: var(--rui-line-strong); --scroll-thumb-hover: var(--rui-ink-3); --scroll-track: transparent;
+  --side-w: var(--rui-side-w);
+  --rm-r: 7px; --rm-r-lg: 10px;
+}
+html[data-app-theme="rui"] body { background: var(--rui-bg); color: var(--rui-ink); }
+
+/* ---- 설정 화면 ---- */
+html[data-app-theme="rui"] .rui-legacy-only { display: none; }
+.rui.rui-embed { min-height: 0; background: none; font-size: 14px; }
+html[data-app-theme="rui"] .rui.rui-embed { margin-bottom: 8px; }
+
+/* ---- 2. 공통 부품 ---- */
+html[data-app-theme="rui"] body { -webkit-font-smoothing: antialiased; }
+html[data-app-theme="rui"] ::selection { background: var(--rui-accent-soft); color: var(--rui-accent-text); }
+/* (v168) 자료 보기 글 층은 투명 글자 — 위의 선택 글자색이 덮으면 고를 때 겹친 글이 다른 글꼴·크기로 드러난다 */
+html[data-app-theme="rui"] .dv-tl span::selection, html[data-app-theme="rui"] .dv-tl::selection { color: transparent; }
+/* (v181) 선택 바탕은 반투명 — 불투명한 accent-soft 가 쪽 그림의 글자를 덮어 드래그한 글씨가 안 보이던 것 */
+html[data-app-theme="rui"] .dv-tl span::selection, html[data-app-theme="rui"] .dv-tl::selection { background: color-mix(in srgb, var(--rui-accent) 26%, transparent); }
+html[data-app-theme="rui"] :focus-visible { outline: 2px solid var(--rui-accent); outline-offset: 1px; }
+html[data-app-theme="rui"] h1, html[data-app-theme="rui"] h2, html[data-app-theme="rui"] h3 { letter-spacing: -.01em; }
+
+/* 묶음: 면은 1px 선으로 나눈다 */
+html[data-app-theme="rui"] .card { padding: var(--pad-card); margin-bottom: 16px; border: 1px solid var(--rui-line); border-radius: var(--rui-r-lg); background: var(--rui-surface); box-shadow: none; }
+html[data-app-theme="rui"] .card h2 { font-size: calc(16px * var(--fsa)); font-weight: 650; }
+html[data-app-theme="rui"] .card h3 { font-size: calc(14px * var(--fsa)); font-weight: 650; }
+html[data-app-theme="rui"] .hero-title { font-size: calc(22px * var(--fsa)); font-weight: 700; letter-spacing: -.02em; }
+html[data-app-theme="rui"] .hero-sub { font-size: calc(13.5px * var(--fsa)); color: var(--rui-ink-2); }
+html[data-app-theme="rui"] .view-title { font-size: calc(16px * var(--fsa)); font-weight: 700; letter-spacing: -.02em; }
+
+/* 버튼: 높이 34, 강조색은 주요 동작만 */
+html[data-app-theme="rui"] :is(.ghost-btn, .small-btn, .mini-btn, .danger-btn, .primary, .big-btn):not(.rui *) { min-height: 34px; padding: 0 12px; border-radius: var(--rui-r); font-size: calc(13.5px * var(--fsa)); font-weight: 600; line-height: 1.3; box-shadow: none; transform: none; transition: background .12s, border-color .12s, color .12s; }
+html[data-app-theme="rui"] :is(.ghost-btn, .small-btn, .mini-btn, .big-btn):not(.primary):not(.danger-btn):not(.primary-mini):not(.danger):not(.rui *) { border: 1px solid var(--rui-line-strong); background: var(--rui-surface); color: var(--rui-ink); }
+html[data-app-theme="rui"] :is(.ghost-btn, .small-btn, .mini-btn, .big-btn):not(.primary):not(.danger-btn):not(.primary-mini):not(.danger):not(.rui *):hover:not(:disabled) { background: var(--rui-hover); color: var(--rui-ink); }
+html[data-app-theme="rui"] :is(.primary, button.primary, .mini-btn.primary-mini) { border: 1px solid var(--rui-accent); background: var(--rui-accent); color: var(--rui-accent-ink); }
+html[data-app-theme="rui"] :is(.primary, button.primary, .mini-btn.primary-mini):hover:not(:disabled) { background: var(--rui-accent); color: var(--rui-accent-ink); filter: brightness(1.08); }
+html[data-app-theme="rui"] .danger-btn, html[data-app-theme="rui"] .mini-btn.danger { border: 1px solid var(--rui-bad); background: var(--rui-surface); color: var(--rui-bad); }
+html[data-app-theme="rui"] .danger-btn:hover:not(:disabled), html[data-app-theme="rui"] .mini-btn.danger:hover:not(:disabled) { background: var(--rui-bad-soft); color: var(--rui-bad); }
+html[data-app-theme="rui"] .mini-btn { min-height: 28px; padding: 0 9px; font-size: calc(12.5px * var(--fsa)); }
+
+/* 세그먼트 */
+html[data-app-theme="rui"] .seg:not(.rui *) { gap: 2px; padding: 0; border-radius: var(--rui-r); background: none; }
+html[data-app-theme="rui"] .seg-btn:not(.rui *) { min-height: 30px; padding: 0 10px; border: 1px solid transparent; border-radius: var(--rm-r); background: none; color: var(--rui-ink-2); font-size: calc(13px * var(--fsa)); font-weight: 550; box-shadow: none; }
+html[data-app-theme="rui"] .seg-btn:hover:not(.rui *) { background: var(--rui-hover); border-color: transparent; color: var(--rui-ink); }
+html[data-app-theme="rui"] .seg-btn.active:not(.rui *) { background: var(--rui-accent-soft); border-color: transparent; color: var(--rui-accent-text); font-weight: 650; box-shadow: none; }
+
+/* 입력칸 */
+html[data-app-theme="rui"] :is(input[type="text"], input[type="search"], input[type="number"], input[type="password"], input[type="email"], input[type="url"], input[type="date"], input[type="datetime-local"], input[type="time"], input:not([type]), select, textarea):not(.rui *) { border-color: var(--rui-line-strong); border-radius: var(--rui-r); background-color: var(--rui-surface); color: var(--rui-ink); box-shadow: none; }
+html[data-app-theme="rui"] :where(input, select, textarea):focus-visible { outline: 2px solid var(--rui-accent); outline-offset: 0; border-color: var(--rui-accent); box-shadow: none; }
+html[data-app-theme="rui"] ::placeholder { color: var(--rui-ink-3); opacity: 1; }
+html[data-app-theme="rui"] select { --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23808580' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7.5l5 5 5-5'/%3E%3C/svg%3E"); }
+
+/* 표 */
+html[data-app-theme="rui"] table th { color: var(--rui-ink-2); border-color: var(--rui-line); font-weight: 600; }
+html[data-app-theme="rui"] table td { border-color: var(--rui-line); }
+
+/* 문제 보기 */
+html[data-app-theme="rui"] .choice { border: 1px solid var(--rui-line-strong); border-radius: var(--rui-r); transform: none; }
+html[data-app-theme="rui"] .choice:hover:not(:disabled) { transform: none; background: var(--rui-hover); border-color: var(--rui-line-strong); }
+html[data-app-theme="rui"] .choice.selected { border-color: var(--rui-accent); background: var(--rui-accent-soft); }
+html[data-app-theme="rui"] .choice.correct { border-color: var(--rui-ok); background: var(--rui-ok-soft); }
+html[data-app-theme="rui"] .choice.wrong { border-color: var(--rui-bad); background: var(--rui-bad-soft); }
+
+/* ---- 3. 왼쪽 메뉴: 공용 RUI.navHtml 을 쓴다. 색은 공용 토큰 그대로 ---- */
+:root[data-app-theme="rui"][data-shell="app"] .sh-rail { min-height: 0; background: var(--rui-side); border-right: 1px solid var(--rui-line); box-shadow: none; }
+html[data-app-theme="rui"] .sh-rail-head { height: 52px; border-bottom: 0; padding: 0 8px 0 14px; }
+html[data-app-theme="rui"] .sh-rail-mark { width: 28px; height: 28px; border-radius: var(--rm-r); background: var(--rui-accent); color: var(--rui-accent-ink); }
+html[data-app-theme="rui"] .sh-rail-mark .sh-ico { width: 15px; height: 15px; }
+html[data-app-theme="rui"] .sh-rail-name { font-weight: 700; font-size: 14px; letter-spacing: -.01em; }
+html[data-app-theme="rui"] .sh-rail-mini:hover { background: var(--rui-hover); }
+html[data-app-theme="rui"] .nav .sh-ri-i { display: grid; place-items: center; width: 16px; height: 16px; flex: none; border-radius: 0; background: none; color: inherit; }
+html[data-app-theme="rui"] .nav a.on .sh-ri-i { color: var(--rui-accent); }
+html[data-app-theme="rui"] .nav .sh-ico, html[data-app-theme="rui"] .nav .nav-ico { width: 16px; height: 16px; margin: 0; }
+html[data-app-theme="rui"] .nav a > span:not(.sh-ri-i) { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html[data-app-theme="rui"] .nav .nav-gh .sh-ico { width: 13px; height: 13px; }
+html[data-app-theme="rui"] body.sh-mini .nav a > span:not(.sh-ri-i), html[data-app-theme="rui"] body.sh-mini .nav .nav-gt, html[data-app-theme="rui"] body.sh-mini .nav .nav-m, html[data-app-theme="rui"] body.sh-mini .nav .nav-sys { display: none; }
+html[data-app-theme="rui"] body.sh-mini .nav a { justify-content: center; padding: 0; }
+
+/* ---- 4. 위 막대 ---- */
+html[data-app-theme="rui"] .topbar { min-height: 52px; padding: 8px 20px; gap: 10px; background: var(--rui-bg); border-bottom: 1px solid var(--rui-line); box-shadow: none; }
+html[data-app-theme="rui"] .topbar :is(.icon-btn, .sh-topbtn) { width: 32px; height: 32px; border: 0; border-radius: var(--rm-r); background: none; color: var(--rui-ink-2); box-shadow: none; }
+html[data-app-theme="rui"] .topbar :is(.icon-btn, .sh-topbtn):hover { background: var(--rui-hover); color: var(--rui-ink); }
+
+/* ---- 5. 위쪽 메뉴 ---- */
+html[data-app-theme="rui"][data-layout="apptop"] .topbar { padding: 0 16px; min-height: 52px; gap: 8px; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-brand { font-weight: 700; font-size: 14px; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-hubmenu.nav { flex: 1 1 0; min-width: 0; overflow: visible; }
+html[data-app-theme="rui"][data-rui-topnav="full"][data-layout="apptop"] .sh-hubmenu.nav { overflow-x: auto; overflow-y: hidden; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-topsub { display: none; }
+/* 한 줄: 타이틀 · 메뉴 · 찾기. 모드 전환은 아이콘만 두어 메뉴 자리를 낸다 */
+html[data-app-theme="rui"][data-layout="apptop"] .topbar { flex-wrap: nowrap; }
+html[data-app-theme="rui"][data-rui-toprow="two"][data-layout="apptop"] .topbar { flex-wrap: wrap; row-gap: 0; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-brand-t { display: inline; max-width: 112px; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-mode { margin: 0 2px; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-mode-t { display: none; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-mode button { padding: 0 8px; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-search { flex: none; }
+html[data-app-theme="rui"][data-layout="apptop"] #statusPill #statusText { display: none; }
+html[data-app-theme="rui"][data-layout="apptop"] #statusPill { padding: 8px; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-brand { order: 0; }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-search { order: 2; }
+html[data-app-theme="rui"][data-layout="apptop"] .top-right { order: 3; }
+html[data-app-theme="rui"][data-layout="apptop"] .nav .sh-ri-i { display: none; }
+html[data-app-theme="rui"][data-layout="apptop"] :is(.sh-aside, .help-toc) { top: 64px; }
+
+/* ---- 6. 떠 있는 것 ---- */
+html[data-app-theme="rui"] .ask-fab { border: 1px solid var(--rui-accent); background: var(--rui-accent); color: var(--rui-accent-ink); box-shadow: var(--shadow-lg); }
+html[data-app-theme="rui"] .tools-fab { border: 1px solid var(--rui-line-strong); background: var(--rui-surface); color: var(--rui-ink); box-shadow: var(--shadow-lg); }
+html[data-app-theme="rui"] .ask-panel { border-left: 1px solid var(--rui-line); background: var(--rui-surface); }
+
+/* ---- 7. 결과물 종이: 앱 테마와 무관하게 흰 종이·검은 글자 ---- */
+html[data-app-theme="rui"] .rp-paper { color-scheme: light; color: #111827; --bg: #fff; --surface: #fff; --surface-2: #f3f4f6; --ink: #111827; --muted: #4b5563; --line: #d1d5db; --accent: #1e3a8a; --accent-strong: #1e3a8a; --accent-weak: #e8eefc; --on-accent: #fff; --correct: #12864a; --correct-bg: #e2f6ea; --wrong: #b91c1c; --wrong-bg: #fceaea; --warn: #9a6600; --warn-bg: #fff2d9; --rui-surface: #fff; --rui-sunken: #f3f4f6; --rui-ink: #111827; --rui-ink-2: #4b5563; --rui-line: #d1d5db; --rui-line-strong: #9ca3af; --rui-accent: #1e3a8a; --rui-accent-text: #1e3a8a; --rui-accent-soft: #e8eefc; }
+
+/* ---- 8. 다색 메뉴·표식을 강조색 하나로 ---- */
+html[data-app-theme="rui"] :is(.sh-ri, .sh-hm, .sh-mega-it, #shMega, .sh-mega) { --hue: var(--rui-accent) !important; }
+html[data-app-theme="rui"] a:not([class]):not(.rui a) { color: var(--rui-accent-text); }
+html[data-app-theme="rui"] .ask-fab-txt { color: inherit; }
+html[data-app-theme="rui"] .status .dot { box-shadow: none; }
+
+html[data-app-theme="rui"] .sv-banner { border-radius: var(--rui-r-lg); }
+html[data-app-theme="rui"] .sv-banner button { white-space: nowrap; flex: none; border-radius: var(--rui-r); }
+@media (max-width: 760px) { html[data-app-theme="rui"] .sv-banner { width: calc(100vw - 24px); bottom: 74px; } }
+
+/* ---- 필터·검색: 입력칸 높이 34, 라벨 12.5, 시작점 맞춤, 버튼은 공용 크기 ---- */
+html[data-app-theme="rui"] main.content :is(input[type="text"], input[type="search"], input[type="number"], input[type="date"], input[type="url"], input:not([type]), select):not(.rui *):not([class*="rr-"]) { min-height: 34px; height: 34px; padding-top: 0; padding-bottom: 0; font-size: calc(13.5px * var(--fsa)); }
+
+html[data-app-theme="rui"] .lib2-facets h4 { color: var(--rui-ink-2); font-size: calc(12.5px * var(--fsa)); font-weight: 600; }
+
+/* ---- 목록 공통(연구행정 ui/pages.css 와 같은 값) ---- */
+.lv-tools .seg button { display: inline-flex; align-items: center; gap: 5px; }
+.lv-tools .seg svg.i { width: 14px; height: 14px; }
+.lv-tools .search { flex: 1 1 240px; max-width: 360px; }
+.lv-group { display: inline-flex; align-items: center; gap: 6px; }
+.lv-group .input { height: 32px; width: auto; }
+.lv-t { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.lv-t > div { min-width: 0; }
+.lv-row { cursor: pointer; }
+.lv-row:hover td { background: var(--rui-sunken); }
+
+table.lv-dense td { padding-top: 5px; padding-bottom: 5px; }
+.lv-img { display: grid; place-items: center; flex: none; overflow: hidden; border-radius: var(--rm-r); background: var(--rui-sunken); color: var(--rui-ink-3); box-shadow: inset 0 0 0 1px var(--rui-line); }
+.lv-img img { width: 100%; height: 100%; object-fit: cover; }
+.lv-img i { font-style: normal; font-weight: 700; }
+.lv-img.sm { width: 36px; height: 36px; font-size: 13px; }
+.lv-img.lg { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--rm-r-lg) var(--rm-r-lg) 0 0; box-shadow: none; font-size: 28px; }
+.lv-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; padding: 14px; }
+.lv-card { display: flex; flex-direction: column; min-width: 0; padding: 0; border: 1px solid var(--rui-line); border-radius: var(--rm-r-lg); background: var(--rui-surface); color: var(--rui-ink); font: inherit; text-align: left; cursor: pointer; }
+.lv-card:hover { border-color: var(--rui-line-strong); background: var(--rui-sunken); }
+.lv-card:focus-visible { outline: 2px solid var(--rui-accent); outline-offset: 1px; }
+.lv-c { display: grid; gap: 3px; padding: 10px 12px 12px; min-width: 0; }
+.lv-c b { font-size: 13.5px; font-weight: 600; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.lv-c small { color: var(--rui-ink-2); font-size: 12px; }
+.lv-f { display: grid; gap: 3px; margin-top: 6px; font-size: 12.5px; }
+.lv-f span { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-width: 0; }
+.lv-f em { flex: none; color: var(--rui-ink-3); font-style: normal; }
+.lv-tree { display: grid; grid-template-columns: 260px minmax(0, 1fr); }
+.lv-tree nav { padding: 8px 6px; border-right: 1px solid var(--rui-line); max-height: 70vh; overflow: auto; }
+.lv-tree ul { margin: 0; padding: 0; list-style: none; }
+.lv-node { display: flex; align-items: center; gap: 2px; border-radius: var(--rm-r); }
+.lv-node.on { background: var(--rui-accent-soft); }
+.lv-tw { flex: none; width: 20px; height: 22px; padding: 0; border: 0; background: none; color: var(--rui-ink-3); font: inherit; }
+.lv-nm { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: 1 1 auto; min-width: 0; height: 30px; padding: 0 8px 0 2px; border: 0; background: none; color: var(--rui-ink); font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.lv-nm span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lv-nm small { flex: none; color: var(--rui-ink-3); font-variant-numeric: tabular-nums; }
+.lv-ck { display: flex; align-items: center; gap: 8px; font-size: 13.5px; }
+@media (max-width: 860px) { .lv-tree { grid-template-columns: minmax(0, 1fr); } .lv-tree nav { max-height: 240px; border-right: 0; border-bottom: 1px solid var(--rui-line); } }
+.lv-row td:not(:first-child) { white-space: nowrap; }
+.lv-wrap { border: 1px solid var(--rui-line); border-radius: var(--rui-r-lg); background: var(--rui-surface); overflow: hidden; }
+.lv-card { position: relative; cursor: pointer; text-align: left; }
+.lv-card .lv-act { position: absolute; top: 6px; right: 6px; }
+td.lv-act { width: 40px; text-align: right; }
+#overlay .scrim { z-index: 3000; } #overlay .drawer { z-index: 3001; }
+.lv-ck { display: flex; align-items: center; gap: 8px; font-size: 13.5px; }
+html[data-app-theme="rui"] .lv-wrap :is(.lv-img .sd-th, .lv-img svg) { width: 100%; }
+/* 제목 칸이 남는 폭을 쓰고, 글이 길어도 표가 옆으로 밀리지 않는다 */
+.lv-wrap .lv-row td:first-child { width: 100%; max-width: 0; }
+.lv-wrap .lv-t { min-width: 240px; }
+.lv-wrap .lv-t > div { flex: 1 1 auto; overflow: hidden; }
+.lv-wrap .lv-t b { display: inline; }
+.lv-wrap .lv-t small { display: block; overflow: hidden; color: var(--rui-ink-2); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.lv-wrap .lv-t i { margin-left: 5px; }
+.lv-wrap .lv-row td:not(:first-child) { max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
+.lv-wrap .lv-row td.lv-act { overflow: visible; }
+.lv-wrap th:first-child { width: 100%; }
+.lv-wrap .lib2-star { border: 0; background: none; color: var(--rui-ink-3); font-size: 15px; cursor: pointer; }
+.lv-wrap .lib2-star.on { color: var(--rui-warn); }
+/* 위쪽 막대: 1400 아래에서 글자가 잘리지 않게 덜 중요한 것부터 뺀다 */
+html[data-app-theme="rui"] .sh-search span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (min-width: 901px) and (max-width: 1400px) {
+  html[data-app-theme="rui"] .sh-search kbd { display: none; }
+  html[data-app-theme="rui"] .topbar .view-title { flex: 0 0 auto; }
+  html[data-app-theme="rui"] #userChip :is(.role-badge, .user-role, em, small) { display: none; }
+}
+.lv-wrap .lv-t i, .lv-wrap .lv-c i { font-style: normal; }
+.sd-hm .lv-wrap .lv-img.lg { background: var(--rui-sunken); }
+html[data-app-theme="rui"] .sd-hm .rn-lbar .rn-vsw { display: none; }
+/* 공용 테마 맞춤: 앱 규칙이 더 강해서 공용 값을 덮던 곳. 아이콘·제목·글꼴을 공용 값으로 */
+html[data-app-theme="rui"] body { font-size: calc(var(--rui-fs) * var(--fs-user, 1)); color: var(--rui-ink); }
+:root[data-app-theme="rui"][data-shell] .sh-rail-mark { width: var(--rui-logo); height: var(--rui-logo); border-radius: var(--rm-r); }
+:root[data-app-theme="rui"][data-shell] .sh-rail-name, html[data-app-theme="rui"] .auth-brand { color: var(--rui-ink); font-size: calc(var(--rui-title-fs) * var(--fs-user, 1)); font-weight: 700; }
+html[data-app-theme="rui"] .auth-mark { width: var(--rui-logo); height: var(--rui-logo); border-radius: var(--rm-r); font-size: 14px; }
+:root[data-app-theme="rui"][data-shell] .topbar .view-title { font-size: calc(16px * var(--fsa)); font-weight: 700; letter-spacing: -.02em; color: var(--rui-ink); }
+/* 화면 제목·패널 제목·표 머리는 공용 값 하나로. 색은 --rui-ink·--rui-ink-2 만 */
+:root[data-app-theme="rui"] :is(.auth-title, .sv-head h2, .sv > h2, .hub-head h2, .sd-hh h2, .hero-title, .ll-t1 h2) { color: var(--rui-ink); font-size: calc(var(--rui-h1-fs) * var(--fs-user, 1)); font-weight: var(--rui-h1-w); letter-spacing: -.02em; }
+:root[data-app-theme="rui"] :is(.auth-sub, .sv-head p, .hub-head p, .sd-hh p, .hero-sub) { color: var(--rui-ink-2); font-size: calc(var(--rui-fs-sm) * var(--fs-user, 1)); }
+:root[data-app-theme="rui"] main.content h2:not(.card h2, .rp-paper h2, .sd-stage h2, .rui h2, .lib2-head-top h2) { color: var(--rui-ink); font-size: calc(var(--rui-h1-fs) * var(--fs-user, 1)); font-weight: var(--rui-h1-w); letter-spacing: -.02em; }
+:root[data-app-theme="rui"] :is(.card h2, .card h3, .dx-sec h3, .dx-hero h3) { color: var(--rui-ink); font-size: calc(var(--rui-h2-fs) * var(--fs-user, 1)); }
+:root[data-app-theme="rui"] main.content th:not(.rp-paper th, .sd-stage th) { font-size: calc(var(--rui-th-fs) * var(--fs-user, 1)); }
+html[data-app-theme="rui"] :is(button, input, select, textarea, optgroup):where(:not(.rp-paper *, .sd-stage *)) { font-family: var(--font, var(--rui-font)); }
+/* 타이틀과 접기: 로고·이름·버전 한 줄, 접기는 공용 동작(data-rui-side)에 앱의 왼쪽 틀을 잇는다 */
+html[data-app-theme="rui"] .sh-rail-mini, html[data-app-theme="rui"] #shSetMenuRow { display: none; }
+html[data-app-theme="rui"] .sh-rail .sh-rail-head.side-head { display: flex; align-items: center; gap: 10px; }
+:root[data-app-theme="rui"][data-shell] .sh-rail-mark { flex: none; display: grid; place-items: center; padding: 0; border: 0; }
+html[data-app-theme="rui"] .sh-rail-mark .sh-ico { display: block; width: 62%; height: 62%; margin: 0; }
+html[data-app-theme="rui"] .sh-rail .side-title { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.2; }
+html[data-app-theme="rui"] .sh-rail .ver { margin: 0; }
+html[data-app-theme="rui"] .topbar .side-toggle { flex: none; margin: 0 2px 0 -6px; }
+html[data-app-theme="rui"][data-layout="apptop"] .topbar .side-toggle { display: none; }
+@media (max-width: 760px) { html[data-app-theme="rui"] .topbar .side-toggle { display: none; } }
+:root[data-app-theme="rui"][data-rui-side="mini"][data-shell="app"]:not([data-layout="apptop"]) { --sh-rail: var(--rui-side-mini, 60px); }
+:root[data-app-theme="rui"][data-rui-side="mini"]:not([data-layout="apptop"]) .sh-rail .sh-rail-head.side-head { justify-content: center; padding: 0; }
+:root[data-app-theme="rui"][data-rui-side="mini"]:not([data-layout="apptop"]) .sh-rail :is(.side-title, .ver, .nav-gh svg, .nav-gh span) { display: none; }
+:root[data-app-theme="rui"][data-rui-side="mini"]:not([data-layout="apptop"]) .sh-rail .nav a > span:not(.sh-ri-i) { display: none; }
+:root[data-app-theme="rui"][data-rui-side="mini"]:not([data-layout="apptop"]) .sh-rail .nav .sh-ico { width: 18px; height: 18px; }
+:root[data-app-theme="rui"][data-rui-side="mini"]:not([data-layout="apptop"]) .sh-rail .sh-rail-list { overflow-x: hidden; }
+/* G1: 전체 글자 배율을 두지 않는다. 메뉴·제목에 그림 문자를 쓰지 않는다 */
+html[data-app-theme="rui"][data-fontscale] { --fs-user: 1; }
+html[data-app-theme="rui"] .sh-mode-e { display: none; }
+/* 모드 이름을 줄이는 폭·위쪽 메뉴에서는 그림으로 보인다. 이름과 그림이 다 없으면 버튼이 빈칸이 된다 */
+html[data-app-theme="rui"] [data-sh-mode="research"] .sh-mode-e { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7.500 15h9'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"] [data-sh-mode="library"] .sh-mode-e { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h14'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"] [data-sh-mode="study"] .sh-mode-e { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"][data-layout="apptop"] .sh-mode-e { display: inline-block; width: 16px; height: 16px; font-size: 0; background: currentColor; -webkit-mask: var(--ico) center / 16px 16px no-repeat; mask: var(--ico) center / 16px 16px no-repeat; }
+@media (max-width: 1100px) { html[data-app-theme="rui"] .sh-mode-e { display: inline-block; width: 16px; height: 16px; font-size: 0; background: currentColor; -webkit-mask: var(--ico) center / 16px 16px no-repeat; mask: var(--ico) center / 16px 16px no-repeat; } }
+html[data-app-theme="rui"] .sh-rail .side-me { margin-top: auto; }
+html[data-app-theme="rui"][data-layout="apptop"] .side-me { display: none; }
+:root[data-app-theme="rui"][data-rui-side="mini"]:not([data-layout="apptop"]) .sh-rail .side-me > div { display: none; }
+@media (max-width: 760px) { html[data-app-theme="rui"] .side-me { display: none; } }
+.hl-wrap { overflow-x: auto; } .hl-tbl td { vertical-align: middle; white-space: nowrap; } .hl-tbl code { font-size: 12.5px; white-space: nowrap; } .hl-act { display: flex; justify-content: flex-end; gap: 6px; white-space: nowrap; }
+#shPick .pick { display: grid; gap: 16px; }
+/* 새 목록이 찾기·보기 전환을 맡는다 */
+html[data-app-theme="rui"] .rn-lbar :is(#rnQ, #rnSort, [data-rn-pv], #sdQ) { display: none; }
+html[data-app-theme="rui"] .rh-bar :is(#rhQ, #rhSort) { display: none; }
+
+/* ---- AI 작업 ---- */
+html[data-app-theme="rui"] .ait-pick { border: 1px solid var(--rui-line); border-radius: var(--rui-r); background: var(--rui-surface); color: var(--rui-ink); }
+html[data-app-theme="rui"] .ait-pick:hover { background: var(--rui-hover); }
+
+/* 스크롤바: 화살표 없는 테마 색 */
+html[data-app-theme="rui"] ::-webkit-scrollbar { width: 10px; height: 10px; background: transparent; }
+html[data-app-theme="rui"] ::-webkit-scrollbar-track, html[data-app-theme="rui"] ::-webkit-scrollbar-corner { background: transparent; }
+html[data-app-theme="rui"] ::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+html[data-app-theme="rui"] ::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 99px; background: var(--rui-line-strong); background-clip: padding-box; }
+
+/* ---- 9. 인쇄: 테마 색이 결과물에 섞이지 않게 ---- */
+@media print {
+  html[data-app-theme="rui"][data-theme][data-mode] { --bg: #fff; --surface: #fff; --surface-2: #fff; --ink: #000; --muted: #333; --line: #bbb; --accent: #000; --accent-strong: #000; --accent-weak: #fff; --on-accent: #fff; --rui-bg: #fff; --rui-surface: #fff; --rui-sunken: #fff; --rui-ink: #000; --rui-ink-2: #333; --rui-ink-3: #444; --rui-line: #bbb; --rui-line-strong: #999; --rui-accent: #000; --rui-accent-text: #000; --rui-accent-soft: #fff; }
+  html[data-app-theme="rui"] { color-scheme: light; }
+  html[data-app-theme="rui"] body { background: #fff; color: #000; }
+}
+
+/* ---- 공통 테마 2: 값은 rui-tokens.css·rui.css 와 같게(조밀한 간격, 작은 모서리, 숫자 고정폭). 색은 토큰이 바꾼다 ---- */
+html[data-app-theme="rui"][data-rui-theme="2"][data-theme][data-mode] { --fsa: calc(var(--fs-user, 1) * .93); --pad-card: 14px; --gap: 12px; --rm-r: 6px; --rm-r-lg: 8px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .rui.rui-embed { font-size: 13px; }
+html[data-app-theme="rui"][data-rui-theme="2"] main.content { padding-top: 12px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .card { margin-bottom: 12px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .sh-rail-head { height: var(--rui-top-h); }
+:root[data-app-theme="rui"][data-rui-theme="2"][data-shell] .sh-rail-mark { border-radius: var(--rm-r); background: linear-gradient(135deg, var(--rui-accent), #8b5cf6); color: #fff; }
+html[data-app-theme="rui"][data-rui-theme="2"] .topbar { min-height: var(--rui-top-h); padding-top: 6px; padding-bottom: 6px; }
+html[data-app-theme="rui"][data-rui-theme="2"][data-layout="apptop"] .topbar { min-height: var(--rui-top-h); padding-top: 0; padding-bottom: 0; }
+html[data-app-theme="rui"][data-rui-theme="2"] .topbar :is(.icon-btn, .sh-topbtn) { width: 30px; height: 30px; }
+html[data-app-theme="rui"][data-rui-theme="2"] :is(.ghost-btn, .small-btn, .danger-btn, .primary, .big-btn):not(.rui *) { min-height: 32px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .mini-btn { min-height: 26px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .seg-btn:not(.rui *) { min-height: 28px; }
+html[data-app-theme="rui"][data-rui-theme="2"] main.content :is(input[type="text"], input[type="search"], input[type="number"], input[type="date"], input[type="url"], input:not([type]), select):not(.rui *):not([class*="rr-"]) { min-height: 32px; height: 32px; }
+
+.lv-tools .lv-group .input { min-height: 0; }
+html[data-app-theme="rui"][data-rui-theme="2"] .lv-group .input { height: 30px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .lv-img.sm { width: 32px; height: 32px; }
+html[data-app-theme="rui"][data-rui-theme="2"][data-theme] { --ctl-h: 32px; --ctl-h-sm: 26px; --ctl-fs: calc(13px * var(--fsa)); --ctl-r: var(--rui-r); --ctl-bw: 1px; }
+:root[data-rui-theme="2"][data-shell="app"]:not([data-layout="apptop"]) { --sh-rail: var(--rui-side-w); }
+html[data-app-theme="rui"][data-rui-theme="2"] .sh-mode { padding: 1px; border-radius: var(--rui-r); }
+html[data-app-theme="rui"][data-rui-theme="2"] .sh-mode button { height: 28px; border-radius: 5px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .sh-search { height: 32px; }
+html[data-app-theme="rui"][data-rui-theme="2"] .top-right :is(.bar-toggle, .status, .user-chip) { height: 30px; min-height: 30px; }
+
+/* ---- G4: 위쪽 띠 한 줄(4-1) — 타이틀 칸과 위쪽 줄을 같은 높이·바탕·아래 선 하나로 ---- */
+@media (min-width: 761px) {
+  :root[data-app-theme="rui"][data-shell="app"]:not([data-layout="apptop"]) .topbar.main-bar { height: var(--rui-top-h); min-height: 0; padding-top: 0; padding-bottom: 0; flex-wrap: nowrap; background: var(--rui-side); border-bottom: 1px solid var(--rui-line); }
+  :root[data-app-theme="rui"][data-shell="app"]:not([data-layout="apptop"]) .sh-rail .sh-rail-head.side-head { height: var(--rui-top-h); border-bottom: 1px solid var(--rui-line); }
+  :root[data-app-theme="rui"][data-shell="app"]:not([data-layout="apptop"]) .sh-rail .sh-rail-head.side-head + .sh-rail-list { padding-top: 10px; }
+}
+/* ---- G4: 위쪽 버튼의 그림 문자·이모지 대신 SVG(가운데 정렬은 상자 안에서 맞춘다) ---- */
+html[data-app-theme="rui"] .topbar .bar-toggle .tgl-ico, html[data-app-theme="rui"] .user-chip .user-ava { display: inline-block; flex: none; width: 16px; height: 16px; font-size: 0; line-height: 0; color: inherit; background: currentColor; -webkit-mask: var(--ico) center / 16px 16px no-repeat; mask: var(--ico) center / 16px 16px no-repeat; }
+html[data-app-theme="rui"] .topbar .bar-toggle { display: inline-flex; align-items: center; justify-content: center; }
+html[data-app-theme="rui"] #darkToggle .tgl-ico { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"][data-rui-mode="dark"] #darkToggle .tgl-ico { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"] #widthToggle .tgl-ico { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"][data-width="short"][data-barwidth="short"] #widthToggle .tgl-ico { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h11M11 8l4 4-4 4M20 5v14'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"] #tkPomoBtn .tgl-ico { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"] .user-chip .user-ava { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0'/%3E%3C/svg%3E"); width: 22px; height: 22px; border-radius: 0; -webkit-mask-size: 16px 16px; mask-size: 16px 16px; color: var(--rui-ink-2); }
+html[data-app-theme="rui"] .user-chip:has(.user-role:not(.hidden)) .user-ava { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z'/%3E%3C/svg%3E"); }
+html[data-app-theme="rui"] .topbar .status .dot { flex: none; align-self: center; }
+html[data-app-theme="rui"] button[data-rui-sym] { display: inline-flex; align-items: center; justify-content: center; }
+html[data-app-theme="rui"] button[data-rui-sym] svg { display: block; flex: none; pointer-events: none; }
+/* G8: 위쪽 메뉴의 드롭다운 안에도 아이콘을 보인다(왼쪽 메뉴와 같은 그림) */
+html[data-app-theme="rui"][data-layout="apptop"] .nav .nav-gi .sh-ri-i { display: grid; }
+html[data-app-theme="rui"] .nav .sh-ri-i svg.i { display: block; width: 16px; height: 16px; }
+/* 자료 보기의 쪽은 종이다. 테마 색으로 덮지 않는다(v134) */
+html[data-app-theme="rui"] .dv-pages { background: var(--rui-sunken); }
+html[data-app-theme="rui"] .dv-pg { background: #fff; box-shadow: 0 0 0 1px var(--rui-line), 0 2px 10px rgba(0, 0, 0, .1); }
+html[data-app-theme="rui"] .dv-pg .dv-fl .dv-fm { background: rgba(253, 224, 71, .62); }
+html[data-app-theme="rui"] .dv-pg .dv-fl .dv-fm.cur { background: rgba(251, 146, 60, .6); outline: 2px solid #ea580c; }
+html[data-app-theme="rui"] .dv-dark .dv-pg { background: #111; }
+html[data-app-theme="rui"] .dv-dark .dv-pg .dv-fl .dv-fm { background: rgba(161, 98, 7, .75); }
+html[data-app-theme="rui"] .dv-dark .dv-pg .dv-fl .dv-fm.cur { background: rgba(194, 65, 12, .8); outline-color: #fb923c; }
+html[data-app-theme="rui"] .dv-tl span.dv-hit { background: rgba(253, 224, 71, .5); }
+html[data-app-theme="rui"] mark.dv-f { background: rgba(253, 224, 71, .7); color: inherit; }
+html[data-app-theme="rui"] mark.dv-f.dv-fcur { background: rgba(251, 146, 60, .7); outline: 2px solid #ea580c; }
+html[data-app-theme="rui"] .dv-fi.on { background: var(--rui-accent-soft); }
+html[data-app-theme="rui"] .dv-fi b { color: var(--rui-accent-text); }
+html[data-app-theme="rui"] .dv-fi span { color: var(--rui-ink-2); }
+html[data-app-theme="rui"] .dv-fi mark { color: var(--rui-ink); }
+/* 범용 로그인 모드: 지금 고른 것을 표시 */
+html[data-app-theme="rui"] #svAdm .sso-modes .big-btn.ghost-btn.on:not(.primary) { border-color: var(--rui-accent); background: var(--rui-accent-soft); color: var(--rui-accent-text); font-weight: 700; }
+/* (v138, G9) 시스템 바로 가기 — 왼쪽 메뉴 아래 한 줄. 위쪽 메뉴 형태·모바일(아래 탭 막대)에서는 위쪽 띠 버튼 하나로 합친다 */
+html[data-app-theme="rui"] .sh-rail .side-links.sh-sys { flex: none; padding: 6px 10px; }
+html[data-app-theme="rui"][data-layout="apptop"] .side-links.sh-sys { display: none; }
+html[data-app-theme="rui"] body.sh-mini .side-links.sh-sys .rui-sysrow span, html[data-app-theme="rui"] body.sh-mini .side-links.sh-sys .rui-sysrow small { display: none; }
+@media (max-width: 760px) { html[data-app-theme="rui"] .side-links.sh-sys { display: none; } }
+/* (v146, G13) 위쪽 띠를 줄일 때(1단계) 모드 버튼은 글자 대신 선 아이콘 */
+html[data-app-theme="rui"] .topbar.tb-t1 .sh-mode-e { display: inline-block; width: 16px; height: 16px; font-size: 0; background: currentColor; -webkit-mask: var(--ico) center / 16px 16px no-repeat; mask: var(--ico) center / 16px 16px no-repeat; }
+html[data-app-theme="rui"] .topbar.tb-t1 #shMode button { min-width: 32px; justify-content: center; }
+
+/* (v148) G16 공통 로그인 화면 — RUI.login 이 #authRui 에 그린다. 예전 카드(auth-card)는 이전 테마 전용 */
+html[data-app-theme="rui"] .auth-screen { display: block; padding: 0; background: var(--rui-bg); }
+html[data-app-theme="rui"] .auth-screen.hidden { display: none; }
+html[data-app-theme="rui"] .auth-screen > .auth-card { display: none; }
+html:not([data-app-theme="rui"]) #authRui { display: none; }
+
+/* (v159, G24) 위쪽 띠 브랜드 칸은 버튼이라 브라우저 기본 테두리(2px outset)가 남는다 — 왼쪽 메뉴 모드에서 숨어 있을 때도 audit 가 밑줄로 읽으므로 0 으로 */
+[data-rui-brand] { border: 0; }

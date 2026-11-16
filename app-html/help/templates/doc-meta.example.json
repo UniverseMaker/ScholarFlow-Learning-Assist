@@ -1,0 +1,17 @@
+{
+  "schema": "lds/1.0",
+  "id": "data-semantic-knowledge-graph-shacl-governance",
+  "title": "검증·품질·거버넌스 — SHACL로 온톨로지를 지킨다",
+  "summary": "SHACL 로 그래프 데이터의 형태·제약을 검증하는 방법과 품질 관리 흐름.",
+  "domain": "data",
+  "track": "semantic",
+  "topic": "knowledge-graph",
+  "level": "advanced",
+  "minutes": 90,
+  "tags": ["shacl", "validation", "owl"],
+  "status": "published",
+  "updated": "2026-09-22",
+  "subjects": ["knowledge-graph"],
+  "authors": ["홍길동"],
+  "source": "원본 출처(책·강의·사내 문서 등)"
+}

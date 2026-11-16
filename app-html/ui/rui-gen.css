@@ -1,0 +1,726 @@
+/* rui-gen.css — tools/build_rui_gen.py 가 style.css 에서 만든다. 손으로 고치지 말 것. 손댈 규칙은 rui-map.css 에. */
+:where(html[data-app-theme="rui"]) .nav-badge { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .dot { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rank-badge.focus { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .wk-no { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .ask-fab { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .ask-panel { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .tools-fab { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .warn-text { color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .mini-btn.danger { color: var(--rui-bad); border-color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .lib2-pbar.done > i { background: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .lib2-star.on { color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .lib2-bd.st { color: var(--rui-warn); border-color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .lib2-bd.up { color: var(--rui-accent-text); border-color: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .icon-mini.on { color: var(--rui-warn); border-color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .newbuild-bar { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .lib2-reader.toc-drawer.toc-drawer-open .lib2-toc { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .lens { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .c-vio { background: color-mix(in srgb, var(--rui-accent) 14%, transparent); color: color-mix(in srgb, var(--rui-accent-text) 80%, var(--ink)); }
+:where(html[data-app-theme="rui"]) .t-vio { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sh-rail-badge { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sh-legend .t-vio::before { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sh-pal { box-shadow: none; }
+:root[data-mode="dark"]:where([data-app-theme="rui"]) .c-vio { color: color-mix(in srgb, var(--rui-accent-text) 72%, var(--ink)); }
+:where(html[data-app-theme="rui"]) .sh-ri.on .sh-ri-i { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .sh-ri-b { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .bx-cal-b i { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .bx-modal { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .ls-sp-W { background: color-mix(in srgb, var(--rui-accent) 12%, var(--surface)); color: color-mix(in srgb, var(--rui-accent-text) 75%, var(--ink)); }
+:where(html[data-app-theme="rui"]) .lb-hero { border: 1px solid color-mix(in srgb, var(--rui-accent) 24%, var(--line)); background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .lb-card::after { background: none; }
+:where(html[data-app-theme="rui"]) .lb-card:hover { border-color: color-mix(in srgb, var(--rui-accent) 50%, var(--line)); }
+:where(html[data-app-theme="rui"]) .lb-mini-b:hover { border-color: color-mix(in srgb, var(--rui-accent) 50%, var(--line)); background: color-mix(in srgb, var(--rui-accent) 6%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .tc-bar i { background: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .it-gram { border-bottom: 2px dashed var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sm-gt i { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sx-hi .sx-a-ico { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sx-mid .sx-a-ico { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sx-title { color: color-mix(in srgb, var(--rui-accent-text) 80%, var(--ink)); }
+:where(html[data-app-theme="rui"]) .sx-btn:hover,
+:where(html[data-app-theme="rui"]) .sx-btn.on { border-color: var(--rui-accent); background: color-mix(in srgb, var(--rui-accent) 10%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .sx-an.mine { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .sx-mine { color: var(--rui-accent-text); }
+:where(html[data-app-theme="rui"]) .sx-hud { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .hud-ai { border-left: 3px solid var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rm-bar { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .rm-b.on { color: var(--rui-accent-ink); }
+:where(html[data-app-theme="rui"]) .rm-pop { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .rm-hli { background: color-mix(in srgb, var(--rui-warn) 22%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .gb-cover { color: var(--rui-ink); background: var(--rui-surface); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .gb-cover .sh-kicker { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .gb-cover p { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .gb-toc a { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .vo-orb { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .xr-fab { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .xr-fab:hover { border-color: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .xr-fab.on { background: var(--rui-accent); border-color: var(--rui-accent); color: var(--rui-accent-ink); box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .sh-mode button.on { box-shadow: none; }
+:where(html[data-app-theme="rui"]) mark.rn-hit { background: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .sv-toast.bad { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sv-banner button { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .rm-arrow.l { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .rm-arrow.r { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) #libBrowse .lib-view-seg .seg-btn.active { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .lib2-new { background: var(--rui-bad); color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .lib2-item:hover { box-shadow: none; }
+:where(html[data-app-theme="rui"]) main.content .rn-tlx-seg button.on { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .rn-tlx-ic.k-chat { background: color-mix(in srgb, var(--rui-accent) 14%, transparent); }
+:where(html[data-app-theme="rui"]) .rn-tlx-ic.k-doc { background: color-mix(in srgb, var(--rui-ok) 15%, transparent); }
+:where(html[data-app-theme="rui"]) .rn-tlx-ic.k-export { background: color-mix(in srgb, var(--rui-accent) 15%, transparent); }
+:where(html[data-app-theme="rui"]) .rn-tlx-ic.k-file { background: color-mix(in srgb, var(--rui-warn) 17%, transparent); }
+:where(html[data-app-theme="rui"]) .rn-tlx-ic.k-ai { background: color-mix(in srgb, var(--rui-accent) 14%, transparent); }
+:where(html[data-app-theme="rui"]) .dv-th img { background: var(--rui-surface); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .dv-pg { background: var(--rui-surface); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .dv-tl span::selection { background: var(--rui-accent-soft); }
+:where(html[data-app-theme="rui"]) .dv-pop { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .dv-pop button:hover { background: var(--rui-hover); }
+:where(html[data-app-theme="rui"]) .dv-pop i { background: var(--rui-hover); }
+:where(html[data-app-theme="rui"]) .dv-c { border: 2px solid var(--rui-line) !important; }
+:where(html[data-app-theme="rui"]) .dv-c.c-y { background: var(--rui-warn) !important; }
+:where(html[data-app-theme="rui"]) .dv-c.c-g { background: var(--rui-ok) !important; }
+:where(html[data-app-theme="rui"]) .dv-c.c-b { background: var(--rui-accent) !important; }
+:where(html[data-app-theme="rui"]) .dv-c.c-p { background: var(--rui-accent-soft) !important; }
+:where(html[data-app-theme="rui"]) mark.dv-hm.noted { border-bottom: 2px solid var(--rui-line-strong); }
+:where(html[data-app-theme="rui"]) mark.dv-f { background: var(--rui-warn); color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .dv-frame { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .dv-tbl td.dv-fh { background: var(--rui-warn-soft); }
+:where(html[data-app-theme="rui"]) .dv-imgbox img { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .rr-it { border-left: 4px solid var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .rr-it.k-ai { border-left-color: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rr-it.k-memo { border-left-color: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .rr-it.k-clip { border-left-color: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rr-it-n { color: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .rr-an p { color: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .tk-pomo-btn.run { border-color: var(--rui-bad); color: var(--rui-bad); background: color-mix(in srgb, var(--rui-bad) 9%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .tk-pomo-btn.run.brk { border-color: var(--rui-ok); color: var(--rui-ok); background: color-mix(in srgb, var(--rui-ok) 10%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .tk-pomo { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .tpm-ctl .tpm-go { color: var(--rui-ink) !important; }
+:where(html[data-app-theme="rui"]) .tpm-dots i.on { background: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .tk-pin.on { color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .tk-pins { background: color-mix(in srgb, var(--rui-warn) 7%, var(--surface)); border: 1px solid color-mix(in srgb, var(--rui-warn) 25%, var(--line)); }
+:where(html[data-app-theme="rui"]) .rm-b.rm-pin { border-color: color-mix(in srgb, var(--rui-warn) 35%, var(--line)); }
+:where(html[data-app-theme="rui"]) .tk-verdict.v-선정 { background: var(--rui-ok-soft); color: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .tk-verdict.v-보완 { background: var(--rui-warn-soft); color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .tk-verdict.v-미흡 { background: var(--rui-bad-soft); color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .tk-sugg del { background: var(--rui-bad-soft); color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .tk-sugg ins { background: var(--rui-ok-soft); color: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .dv-pop-g + .dv-pop-g { border-left: 1px solid var(--rui-line); }
+:where(html[data-app-theme="rui"]) .rr-fh mark { background: var(--rui-warn); color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .tk-ifr { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .t3-ac.ok { border-color: var(--rui-ok); background: color-mix(in srgb, var(--rui-ok) 14%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .t3-ac.bad { border-color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) #libBrowse .lib2-bd.ver,
+:where(html[data-app-theme="rui"]) .lib2-bd.ver { color: var(--rui-accent-text); border: 1px solid color-mix(in srgb, var(--rui-accent) 45%, transparent); background: color-mix(in srgb, var(--rui-accent) 8%, transparent); }
+:where(html[data-app-theme="rui"]) .pp-doc { background: var(--rui-surface); color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .pp-title small { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .pp-doc .pp-m { background: var(--rui-sunken); }
+:where(html[data-app-theme="rui"]) .pp-doc .pp-tab table { border-top: 2px solid var(--rui-line-strong); border-bottom: 2px solid var(--rui-line-strong); }
+:where(html[data-app-theme="rui"]) .pp-doc .pp-tab th { border-bottom: 1px solid var(--rui-line-strong); }
+:where(html[data-app-theme="rui"]) .pp-img { border: 1px dashed var(--rui-line-strong); color: var(--rui-ink-2); }
+:where(html[data-app-theme="rui"]) .pp-cite { color: var(--rui-accent-text); }
+:where(html[data-app-theme="rui"]) .pp-cite.bad,
+:where(html[data-app-theme="rui"]) .pp-bad { color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .pp-notes { border-top: 1px solid var(--rui-line); }
+:where(html[data-app-theme="rui"]) .pp-seg button.on { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-cmp { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .pp-cmp-m { border-left: 1px solid color-mix(in srgb, var(--rui-line) 30%, transparent); }
+:where(html[data-app-theme="rui"]) .pp-cmp.err { background: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .pp-ai-t.on { background: var(--rui-surface); color: var(--rui-ink); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-badge { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .pp-main { color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .pp-menu { box-shadow: var(--shadow-lg); }
+:where(html[data-app-theme="rui"]) .pp-mbox { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-tab em { color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .pp2 .pp-flash { background: color-mix(in srgb, var(--rui-warn) 38%, transparent) !important; }
+:where(html[data-app-theme="rui"]) .pp2 .pp-ai-new { background: color-mix(in srgb, var(--rui-accent) 14%, transparent); }
+:where(html[data-app-theme="rui"]) .pp-selbar { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-math { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-inline { border: 1px solid color-mix(in srgb, var(--rui-accent) 45%, var(--line)); background: color-mix(in srgb, var(--rui-accent) 6%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .pp-fg mark { background: color-mix(in srgb, var(--rui-warn) 50%, transparent); }
+:where(html[data-app-theme="rui"]) .pp-pg { background: var(--rui-surface); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-sbox { background: color-mix(in srgb, var(--rui-warn) 40%, transparent); outline: 2px solid var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .pp-fh { background: color-mix(in srgb, var(--rui-warn) 45%, transparent); }
+:where(html[data-app-theme="rui"]) .pp-fh.on { background: color-mix(in srgb, var(--rui-warn) 55%, transparent); outline: 2px solid var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .pp2-pvb > .pp-doc { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-docnote { background: var(--rui-sunken); color: var(--rui-accent-text); }
+:where(html[data-app-theme="rui"]) .pp-frame { background: var(--rui-surface); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-frame h3 { background: var(--rui-accent); color: var(--rui-accent-ink); }
+:where(html[data-app-theme="rui"]) .pp-block { background: var(--rui-sunken); }
+:where(html[data-app-theme="rui"]) .pp-block b { color: var(--rui-accent-text); }
+:where(html[data-app-theme="rui"]) .pp-block.alertblock { background: var(--rui-sunken); }
+:where(html[data-app-theme="rui"]) .pp-block.alertblock b { color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .pp-block.exampleblock { background: var(--rui-sunken); }
+:where(html[data-app-theme="rui"]) .pp-block.exampleblock b { color: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .pp-alert { color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .pp-pre { background: var(--rui-sunken); }
+:where(html[data-app-theme="rui"]) .pp-algo { border-top: 2px solid var(--rui-line-strong); border-bottom: 2px solid var(--rui-line-strong); }
+:where(html[data-app-theme="rui"]) .pp-ph { border: 1px dashed var(--rui-line-strong); color: var(--rui-ink-2); }
+:where(html[data-app-theme="rui"]) .pp-img.ex { background: var(--rui-sunken); color: var(--rui-ink-2); }
+:where(html[data-app-theme="rui"]) .pp-img small { color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .pp-toc { border: 1px solid var(--rui-line); }
+:where(html[data-app-theme="rui"]) .pp-toc span { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) h2.pp-ch { border-bottom: 1px solid var(--rui-line); }
+:where(html[data-app-theme="rui"]) .pp-aih { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .pp-m.u > div { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .pp-m.u q { background: var(--rui-hover); }
+:where(html[data-app-theme="rui"]) .pp-aichips button:hover { border-color: var(--rui-accent); color: var(--rui-accent-text); background: color-mix(in srgb, var(--rui-accent) 7%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .pp-aiin:focus-within { border-color: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .pp-aiin .primary { background: var(--rui-surface); color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .pp-fimg img { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .pp-aimg { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .pp-wbar { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .pp-tpl:hover { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp-tpl-img { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .pp-tpl-img img { box-shadow: none; background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .pp-tpl-img i { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp2.nw .pp2-side { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pp2.nw .pp2-ai { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .rp-cA { border-bottom: 3px solid var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .rp-hA { border-bottom: 3px solid var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .rp-tn { color: var(--rui-accent-text); }
+:where(html[data-app-theme="rui"]) .rp-gbar i { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rp-inl { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .rp-inprev td,
+:where(html[data-app-theme="rui"]) .rp-inprev th { border: 1px solid var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rp-cprev { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .rp-mini { background: var(--rui-surface); color: var(--rui-ink); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .rp-mini h1 { border-bottom: 2px solid var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rp-mini td,
+:where(html[data-app-theme="rui"]) .rp-mini th { border: 1px solid var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .rp-mini th { background: var(--rui-sunken); }
+:where(html[data-app-theme="rui"]) .rp-mini .rp-box { border-left: 5px solid var(--rui-accent); background: var(--rui-sunken); }
+:where(html[data-app-theme="rui"]) .ll-tabs button.on { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .ll-spark i { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .ll-card:hover { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .ll-meta em.c { background: color-mix(in srgb, var(--rui-warn) 14%, var(--surface)); color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .ll-meta em.ai { background: color-mix(in srgb, var(--rui-accent) 12%, var(--surface)); color: var(--rui-accent-text); }
+:where(html[data-app-theme="rui"]) .ll-star { color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .ll-gapbox { border: 1px solid color-mix(in srgb, var(--rui-accent) 35%, var(--line)); background: color-mix(in srgb, var(--rui-accent) 5%, var(--surface)); }
+:where(html[data-app-theme="rui"]) .ll-svg { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .ll-drate button.on { color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .ls-pg i { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .ls-card { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .ls-n.c-yellow { border-left-color: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .ls-n.c-green { border-left-color: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .ls-n.c-blue { border-left-color: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .ls-n.c-pink { border-left-color: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .ls-svg { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .rn-vsw button.on { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .sd-th { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sd-frame { background: var(--rui-surface); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .sd-sb { border: 1.5px solid var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sd-sb2 { border: 1px solid var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sd-sb3 { border: 1px dashed var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sd-hd { border: 1.5px solid var(--rui-accent); background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sd-rot { border: 1.5px solid var(--rui-accent); background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sd-rot::after { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sd-gd { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .sd-mq { border: 1px solid var(--rui-accent); background: var(--rui-accent-soft); }
+:where(html[data-app-theme="rui"]) .sd-modal { background: var(--rui-accent-soft); }
+:where(html[data-app-theme="rui"]) .sd-mbox { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .sd-tabs button.on { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .sd-pf { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .sd-pf.black { outline: 1px solid var(--rui-line-strong); }
+:where(html[data-app-theme="rui"]) .sd-pbar button { border: 1px solid var(--rui-accent); background: var(--rui-accent-soft); color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .sd-pnote { background: var(--rui-accent-soft); }
+:where(html[data-app-theme="rui"]) .sd-pnext small { color: var(--rui-ink-2); }
+:where(html[data-app-theme="rui"]) .pi-tabs button.on { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .pi-band > div { color: var(--rui-ink); }
+:where(html[data-app-theme="rui"]) .pi-band .st1 { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .pi-band .st2 { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .pi-band .st3 { background: var(--rui-ok); }
+:where(html[data-app-theme="rui"]) .pi-band .cur { box-shadow: inset 0 0 0 1px var(--rui-line); }
+:where(html[data-app-theme="rui"]) .pi-now { background: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .pi-now em { background: var(--rui-bad); color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .kg { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .kc { background: var(--rui-accent); }
+:where(html[data-app-theme="rui"]) .kk { background: var(--rui-accent-soft); }
+:where(html[data-app-theme="rui"]) .kx { background: var(--rui-warn); }
+:where(html[data-app-theme="rui"]) .pi-steps li.ok i { color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .dx-top { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .dx-brief { background: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .dv-pg { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .dv-side.dv-over { box-shadow: none; }
+:where(html[data-app-theme="rui"]) .emg-login .emg-open { border: 1px solid var(--rui-bad); color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .emg-login .emg-form { border: 1px solid var(--rui-bad); background: color-mix(in srgb, var(--rui-bad) 6%, transparent); }
+:where(html[data-app-theme="rui"]) .emg-login .emg-note { color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .emg-login .emg-err { color: var(--rui-bad); }
+:where(html[data-app-theme="rui"]) .emg-bar { background: var(--rui-bad); color: var(--rui-surface); }
+:where(html[data-app-theme="rui"]) .emg-alert { background: var(--rui-bad); color: var(--rui-surface); box-shadow: none; }
+:where(html[data-app-theme="rui"]) .emg-alert .btn { background: var(--rui-surface); color: var(--rui-bad); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .llm-item { border-radius: var(--radius-md, var(--rui-r-lg)); }
+:root:where([data-app-theme="rui"][data-rui-theme="2"]) .acct-menu .icon-btn { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .width-menu { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .nav-arrow { border-radius: var(--nav-radius, var(--rui-r)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-facets { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-fo { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-tagq { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-mini { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-item { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-item.compact { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-tnode { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-selbar { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-side { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-side-head input { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .icon-mini { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-layoutpop { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-toc { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-link { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-hit { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-body { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-body code { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-body pre { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-body blockquote { border-radius: 0 var(--rui-r) var(--rui-r) 0; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .help-mini { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dc-col { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) :where(input:not([type]), input[type="text"], input[type="search"], input[type="number"], input[type="date"],
+       input[type="datetime-local"], input[type="time"], input[type="month"], input[type="email"], input[type="url"],
+       input[type="password"], textarea) { border-radius: var(--radius-sm, var(--rui-r)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) input[type="file"]::file-selector-button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .llm-vault { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .log-resize { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .log-rs-btn { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .newbuild-bar { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .llm-vault .vault-where { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-toc { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-toc-i { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-side-gbtn { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lens.v-popup { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lens.v-float { border-radius: var(--rui-r-lg); }
+:root[data-shell]:where([data-app-theme="rui"][data-rui-theme="2"]) .sh-search { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-search kbd,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-pal-ft span { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-topbtn { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-rail-mark { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-rail-btn { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-mini { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-tile { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-tile-i { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-brand-m { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-node { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-tab { border-radius: var(--rui-r) var(--rui-r) 0 0; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-tab-x { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-tab-add { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-itabs .sh-ask { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-pal { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-pal-it { border-radius: var(--rui-r); }
+:root[data-shell="app"]:where([data-app-theme="rui"][data-rui-theme="2"]) .sh-rail-mark { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-rail-mini { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-ri { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-ri-i { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-rg-x { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-hm { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-mega { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-mega-it { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-mega-it .sh-ri-i { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) body.sh-railm .sh-ri { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-read { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-cal-b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-li { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-vb-b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-tool { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-tool > .sh-ico { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-modal { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-flash-b { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-shr { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-mood { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-part { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-player { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-c { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-c b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-why { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .bx-rep { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lb-hero { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lb-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lb-loading { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lb-card2 { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lb-c { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lb-c b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lb-mini-b { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tc-board { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tc-student { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tc-msg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tc-fb { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tc-scores div { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tc-end { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .it-passage { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .it-why { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .xr-tip { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sm-top { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .st-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .st-key { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tc-transfer { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dt-item { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sx-alert { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sx-a-ico { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sx-after { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sx-an { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sx-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sx-tabs button { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sx-hud { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .hud-b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .hud-nudge,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .hud-ai { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .hud-act { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rm-pop { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rm-hli { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ar-v { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .gb-cover { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .gb-ch { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .gb-core { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .gb-fix { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-new { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-sec { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-drop { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-drop-hint { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-file { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-doc { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-tabs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-empty { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-kind { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-chat-log { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-doc-bar,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-ai-bar,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-src-bar { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-vers { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-s { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-s-n { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-prev { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-page { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-tl.big li { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-how { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sv-dl code,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sv code { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sv-log li { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sv-toast { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .acm-link { border-radius: var(--rui-r); }
+:root[data-shell]:where([data-app-theme="rui"][data-rui-theme="2"]) .acct-menu .acct-logout { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) :is(main.content, .ask-panel, #toolsPanel, .tk-drawer) .small-btn:not(.mini-btn) { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .auth-server-down { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-tree .tk-nl { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-diff { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-fc { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-ch { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-dialog p { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-masters { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-box { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-list { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-dir { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-ep { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-gpick .rn-gsel { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-gmove { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-side { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-f { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-main { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-hits button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-ap { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-refs li.flash { border-radius: var(--rui-r); }
+@media (max-width: 760px) { :where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-box,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-box.wide { border-radius: var(--rui-r-lg); } }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #libBrowse .lib2-sort select { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #libBrowse .lib-view-seg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #libBrowse .lib-view-seg .seg-btn { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #libBrowse .lib2-tools > .small-btn { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #libBrowse .lib-lv { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-new { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-tblw { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #libBrowse .lib2-pg { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-item { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-tlx-seg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rn-tlx-seg button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-tlx-day ol { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-tlx-ic { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-tlx-empty { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-sum { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rl-tq { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-grp { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-pn { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-q { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-stabs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-th { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-toc { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-pop { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-pop button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-media video { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-tabs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-tabs button b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-panel,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-col { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-sel { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-items { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-it { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-done { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-pomo { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tpm-h button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tpm-pre input { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tpm-task { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-pin { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-pins { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-rev { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-flow,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-graph,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-scatter { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-sugg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-sugg .chg button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-rh { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-dialog p { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rn-top :is(.ghost-btn, .small-btn, .icon-mini) { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rn-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rn-tabs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rn-pin { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-g { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-b .rr-n { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rr-top .rr-g select,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rr-top #rrSel { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rr-ctx { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) #rndArea .rr-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv .dv-bar .dv-grp { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv .dv-bar .dv-b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv .dv-bar input.dv-pn { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv .dv-bar input.dv-q { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv .dv-prep { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv .dv-pop { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-act { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-chg { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) select.rr-sel,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) input.rr-inp { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-doc-h .rr-dt { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-ds { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-dn { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-ds-h .rr-dh { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-db { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-fnote { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rr-fg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .hub-ctx { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-sum > div { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-li { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lf-mark { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .tk-ifr { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .t3-pick { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .t3-pi { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .t3-chat p { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .t3-pg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .t3-ac { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .t3-grid td { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .t3-cf { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .lib2-ver { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-files,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-ed,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-pv { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-f { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-f button:first-child { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-snip button,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-ai button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-sug { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-img { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pp2 select.pp-proj,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp2s select.pp-proj { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tb,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-ib { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-seg { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-seg button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-cmp { border-radius: var(--rui-r) 0 0 var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-cmp-m { border-radius: 0 var(--rui-r) var(--rui-r) 0; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-ai-t { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp2-rail button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tr { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tm { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-menu { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-menu button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-toast { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-mbox { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tab button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-selbar { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-selbar button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-math { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-inline { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-oi { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pp-find input[type="search"],
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pp-find input[type="text"],
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pp-bq,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pp-brow input,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pp-pfind input,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pp-pg-i input { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-fg button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-pi { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-badd { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-bri { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-be { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-be-a button,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-cm-a button,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tv-a button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-cm { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-symg button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-sw { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-eng,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-keys { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-keys kbd { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-logv details { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-docnote { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-frame { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-block { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-pre { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-ph { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-toc { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-m.u > div { border-radius: var(--rui-r-lg) var(--rui-r-lg) 4px var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-m.u q { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-m.a .pp-mb2 { border-radius: var(--rui-r-lg) var(--rui-r-lg) var(--rui-r-lg) 4px; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-chg { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-chg button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-pend { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-mfoot button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-aiin { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-aiin .primary { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-dfile { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tg input { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-fimg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-aimg { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-wc div { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-act { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tpl { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pp-tpl-img i { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rp-title { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-ribbon { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rp-ribbon select { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-status { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-di { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-cprev { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) body.boot-slow .boot-re { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-top { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-tabs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-det { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .ll-sbar input { border-radius: var(--rui-r-lg) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-sbar .primary { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-add { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-empty { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .ll-lbar input[type="search"] { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-col { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-mini { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-mxw { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-gapbox { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-svg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-miss { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-mrow { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-rwo { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-rwout { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ll-dst button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rh-acts button { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rh-side { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rh-side input { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rh-projs button,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rh-fold button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rh-bar input,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rh-bar select { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rh-tbl { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rh-files { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rh-new .primary { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rp-back { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .mr-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .mr-rub button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .mr-panel button { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .mr-go { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .mr-qq { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dr-src .primary { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dr-c { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sv-iss { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .ls-doc { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-pre [contenteditable] { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-grade button { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-svg { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-pick { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-cal > div { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .ls-q label { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rn-lbar #rnQ { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .rn-lbar #rnSort { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-vsw { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-vsw button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-rows { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-pm { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-gpick .rn-row .rn-gsel { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .rn-docx { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-play-b { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .sd-rib #sdFs { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-ws { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-add { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .sd-p input,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .sd-p select { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .sd-p textarea { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-thm button,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-lays button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-colm > div button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-pj { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content #sdQ { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-card { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-mbox { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-tabs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-tpl { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-gth button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .sd-orow input,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .sd-orow select,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-modal .sd-orow input,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-modal .sd-orow select { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-pbar button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sd-pnote { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pi-ha select { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-sbar { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-tabs { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-tabs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-empty { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-kw span { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-k { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-band { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-band > div { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-yg > div { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-bs { border-radius: var(--rui-r) var(--rui-r) 0 0; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-o { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-o small { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pi-f input,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pi-f select,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pi-tb input { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pi-f textarea { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-gi { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) main.content .pi-gh input { border-radius: var(--rui-r) !important; }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-hist code { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-cur { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-stat div { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-docs button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-go button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-fr { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-none2 { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-dlist button { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-wg > div { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-nob { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .pi-rl button { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-do { border-radius: var(--radius-sm, var(--rui-r)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-brief { border-radius: var(--radius, var(--rui-r-lg)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-confirm { border-radius: var(--radius-sm, var(--rui-r)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-ks { border-radius: var(--radius, var(--rui-r-lg)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-sec { border-radius: var(--radius, var(--rui-r-lg)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-chip { border-radius: var(--radius-sm, var(--rui-r)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-top { border-radius: var(--radius, var(--rui-r-lg)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-pill { border-radius: var(--radius-sm, var(--rui-r)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-ins { border-radius: var(--radius, var(--rui-r-lg)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-in { border-radius: var(--radius-sm, var(--rui-r)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-leg button,
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-fl button { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dx-rk { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .dv-fx { border-radius: var(--rui-r); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .sh-nofeat > div { border-radius: var(--radius, var(--rui-r-lg)); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .emg-login .emg-form { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .emg-alert { border-radius: var(--rui-r-lg); }
+:where(html[data-app-theme="rui"][data-rui-theme="2"]) .emg-alert .btn { border-radius: var(--rui-r); }

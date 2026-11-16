@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScholarFlow 시작하기 — 첫 30분 안내</title>
+<script type="application/json" id="doc-meta">{
+  "schema": "lds/1.0",
+  "id": "guide-start-scholarflow-getting-started",
+  "title": "ScholarFlow 시작하기 — 첫 30분 안내",
+  "summary": "서버를 켜고, AI 를 연결하고, 첫 연구 프로젝트와 첫 학습 자료를 열어 보는 순서.",
+  "domain": "guide", "track": "start", "topic": "scholarflow",
+  "level": "beginner",
+  "minutes": 10,
+  "tags": ["scholarflow", "시작하기"],
+  "status": "published",
+  "updated": "2026-11-16"
+}</script>
+<script>
+(function () { var r = document.documentElement;
+  try { var t = JSON.parse(localStorage.getItem('lds:theme')); if (t === 'light' || t === 'dark') r.setAttribute('data-theme', t); } catch (e) {}
+  try { var L = JSON.parse(localStorage.getItem('lds:layout')) || {};
+        var AX = { toc: ['left','right','top','hidden'], width: ['narrow','default','wide','full'], header: ['static','sticky','rail'] };
+        for (var k in AX) if (AX[k].indexOf(L[k]) >= 0) r.setAttribute('data-' + k, L[k]); } catch (e) {}
+})();
+</script>
+<style>
+:root { --bg:#ffffff; --fg:#1a2233; --muted:#5b6478; --line:#dfe4ee; --accent:#0f766e; --card:#f6f8fc; --ok:#15803d; --warn:#b45309;
+        --measure: 74ch; --toc-w: 230px; }
+:root[data-theme="dark"] { --bg:#0f1420; --fg:#e6ebf5; --muted:#9aa6bd; --line:#27324a; --accent:#2dd4bf; --card:#151c2c; --ok:#4ade80; --warn:#fbbf24; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) { --bg:#0f1420; --fg:#e6ebf5; --muted:#9aa6bd; --line:#27324a; --accent:#2dd4bf; --card:#151c2c; } }
+:root[data-width="narrow"] { --measure: 62ch; } :root[data-width="wide"] { --measure: 96ch; } :root[data-width="full"] { --measure: none; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.75 "Pretendard", "Malgun Gothic", system-ui, sans-serif; }
+.shell { display: grid; grid-template-columns: var(--toc-w) minmax(0, 1fr); gap: 28px; max-width: 1200px; margin: 0 auto; padding: 28px 20px 80px; }
+:root[data-toc="right"] .shell { grid-template-columns: minmax(0, 1fr) var(--toc-w); } :root[data-toc="right"] .toc { order: 2; }
+:root[data-toc="top"] .shell, :root[data-toc="hidden"] .shell { grid-template-columns: minmax(0, 1fr); }
+:root[data-toc="hidden"] .toc { display: none; }
+:root[data-header="sticky"] header.doc { position: sticky; top: 0; background: var(--bg); z-index: 5; }
+main { max-width: var(--measure); min-width: 0; }
+.toc { position: sticky; top: 16px; align-self: start; font-size: 14px; border-left: 2px solid var(--line); padding-left: 12px; }
+.toc a { color: var(--muted); text-decoration: none; display: block; padding: 2px 0; }
+.toc a:hover { color: var(--accent); }
+h1 { font-size: 30px; line-height: 1.3; margin: 0 0 8px; } h2 { margin-top: 44px; border-bottom: 1px solid var(--line); padding-bottom: 6px; } h3 { margin-top: 28px; }
+.crumb { color: var(--muted); font-size: 13px; } .lead { color: var(--muted); font-size: 17px; }
+.chip { display: inline-block; font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; margin-right: 4px; color: var(--muted); }
+.note { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 16px; margin: 16px 0; }
+.note.warn { border-left-color: var(--warn); }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 15px; } th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; } th { background: var(--card); }
+code { background: var(--card); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; font-size: 14px; }
+pre { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; overflow: auto; }
+details { margin-top: 6px; color: var(--ok); }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="toc" aria-label="목차">
+    <b>목차</b>
+    <a href="#s1">1. 서버 켜기</a>
+    <a href="#s2">2. 관리자 비밀번호</a>
+    <a href="#s3">3. AI 연결</a>
+    <a href="#s4">4. 첫 연구 프로젝트</a>
+    <a href="#s5">5. 학습 자료 읽기</a>
+    <a href="#check">6. 스스로 확인</a>
+  </nav>
+  <main>
+    <header class="doc">
+      <p class="crumb">가이드 › 시작하기 › ScholarFlow</p>
+      <h1>ScholarFlow 시작하기 — 첫 30분 안내</h1>
+      <p class="lead">서버를 켜고, AI 를 연결하고, 첫 연구 프로젝트와 첫 학습 자료를 열어 보는 순서입니다.</p>
+      <p><span class="chip">입문</span><span class="chip">약 10분</span><span class="chip">#시작하기</span></p>
+    </header>
+
+    <section id="s1">
+      <h2>1. 서버 켜기</h2>
+      <p>ScholarFlow 는 파이썬 표준 라이브러리로 만든 서버 하나로 돌아갑니다. 데이터는 <b>데이터 폴더</b>에 모입니다.</p>
+      <pre><code>python -m pip install -r requirements.txt
+python serve.py 18162 --data-dir="D:/scholarflow-data"</code></pre>
+      <p>브라우저에서 <code>http://127.0.0.1:18162</code> 를 엽니다.</p>
+      <div class="note"><b>데이터 폴더 = 전부</b> — 계정·프로젝트·문서·로그·백업이 모두 이 폴더에 있습니다. 폴더를 통째로 복사하면 다른 PC 로 옮겨집니다.</div>
+    </section>
+
+    <section id="s2">
+      <h2>2. 관리자 비밀번호</h2>
+      <p>처음에는 <code>admin</code> 계정에 비밀번호가 없어 로그인할 수 없습니다. 비밀번호는 <b>서버 PC 에서만</b> 정합니다.</p>
+      <pre><code>python tools/local_admin.py set --data "D:/scholarflow-data"</code></pre>
+      <p>또는 서버 PC 브라우저로 <code>http://127.0.0.1:18162/local-admin</code> 을 엽니다. 12자 이상으로 정하세요.</p>
+    </section>
+
+    <section id="s3">
+      <h2>3. AI 연결</h2>
+      <p>[설정 → AI 연결]에서 OpenAI 호환 주소·모델·키를 등록하고 <b>연결</b>을 누릅니다. 키는 서버에 암호화되어 저장되고 브라우저로 내려오지 않습니다.</p>
+      <table>
+        <thead><tr><th>항목</th><th>예</th></tr></thead>
+        <tbody>
+          <tr><td>주소</td><td><code>http://localhost:8000/v1</code></td></tr>
+          <tr><td>모델</td><td>서버가 제공하는 모델 이름</td></tr>
+          <tr><td>키</td><td>필요한 경우에만</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="s4">
+      <h2>4. 첫 연구 프로젝트</h2>
+      <ol>
+        <li>🔬 <b>연구지원</b> 모드 → <b>연구 프로젝트</b> → 새 프로젝트</li>
+        <li>PDF·Word·한글 문서를 올립니다. 쪽 단위로 색인됩니다.</li>
+        <li>대화창에 질문하면 AI 가 <b>(파일 p.쪽)</b> 형태로 근거를 인용해 답합니다.</li>
+        <li>좋은 답은 작업 문서로 보내고, DOCX·PPTX·HTML·MD 로 내보냅니다.</li>
+      </ol>
+    </section>
+
+    <section id="s5">
+      <h2>5. 학습 자료 읽기</h2>
+      <p>📚 <b>자료 학습</b> 모드의 <b>학습 자료</b>에서 문서를 고르면 뷰어가 열립니다. 아래 리딩 메이트 막대로 요약·읽어 주기·형광펜을 쓰고, 💬 물어보기(Alt+A)로 지금 보이는 대목에 대해 묻습니다.</p>
+      <div class="note warn"><b>자료 추가</b> — 새 문서는 <code>app-html/library/docs/</code> 에 넣고 <code>python tools/build_catalog.py</code> 를 실행합니다. 자세한 규격은 도움말 '학습 자료 만들기 · 등록'.</div>
+    </section>
+
+    <section id="check">
+      <h2>6. 스스로 확인</h2>
+      <ol>
+        <li>다른 PC 로 옮길 때 무엇을 복사하나요?
+          <details><summary>답 보기</summary>데이터 폴더 전체. 새 PC 에서 <code>--data-dir</code> 로 가리킵니다.</details></li>
+        <li>관리자 비밀번호는 어디서 정하나요?
+          <details><summary>답 보기</summary>서버 PC 에서만 — <code>tools/local_admin.py</code> 또는 <code>/local-admin</code> 화면.</details></li>
+      </ol>
+    </section>
+  </main>
+</div>
+</body>
+</html>

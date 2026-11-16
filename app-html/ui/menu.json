@@ -1,0 +1,92 @@
+{
+  "system": "slc",
+  "label": "ScholarFlow",
+  "groups": [
+    {
+      "title": "연구지원",
+      "items": [
+        {
+          "key": "rx_dash",
+          "label": "오늘 연구",
+          "icon": "chart"
+        },
+        {
+          "key": "rnd",
+          "label": "연구 프로젝트",
+          "icon": "flask"
+        },
+        {
+          "key": "rx_tasks",
+          "label": "AI 작업",
+          "icon": "bulb"
+        },
+        {
+          "key": "rx_proj",
+          "label": "프로젝트 정보·관리",
+          "icon": "card"
+        },
+        {
+          "key": "rx_paper",
+          "label": "논문 작성·보조",
+          "icon": "pencil"
+        },
+        {
+          "key": "rx_report",
+          "label": "보고서 작성·보조",
+          "icon": "report"
+        },
+        {
+          "key": "rx_present",
+          "label": "발표자료 작성·보조",
+          "icon": "layers"
+        },
+        {
+          "key": "rx_lit",
+          "label": "문헌·선행연구",
+          "icon": "book"
+        },
+        {
+          "key": "rx_review",
+          "label": "심사·평가 대비",
+          "icon": "award"
+        }
+      ],
+      "subs": [
+        {
+          "title": "과제",
+          "keys": [
+            "rx_dash",
+            "rnd",
+            "rx_tasks",
+            "rx_proj"
+          ]
+        },
+        {
+          "title": "문서 작성",
+          "keys": [
+            "rx_paper",
+            "rx_report",
+            "rx_present"
+          ]
+        },
+        {
+          "title": "조사·심사",
+          "keys": [
+            "rx_lit",
+            "rx_review"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "자료 학습",
+      "items": [
+        {
+          "key": "library",
+          "label": "학습 자료",
+          "icon": "folder"
+        }
+      ]
+    }
+  ]
+}

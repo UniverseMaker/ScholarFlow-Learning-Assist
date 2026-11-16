@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko" data-ui="modern" data-theme="white" data-mode="light" data-fontscale="normal" data-layout="app" data-shell="app" data-width="wide" data-barwidth="wide" data-font="pretendard">
+<head>
+  <meta charset="UTF-8">
+<meta name="app-version" content="v181.1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScholarFlow</title>
+  <!-- 파비콘: 시스템 설정(관리자)에서 이모지/이미지로 교체하면 app.js 가 href 를 바꾼다. -->
+  <link rel="icon" id="faviconLink" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='.9em' font-size='54'%3E%F0%9F%93%98%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css?v=8253cc08f4">
+    <!-- research-ui(공용 테마) — 이전 테마를 고르면 rui-app.js 가 media="not all" 로 끈다 -->
+  <link rel="stylesheet" href="ui/rui-tokens.css?v=1b8fe8a7ca" data-rui-css>
+  <link rel="stylesheet" href="ui/rui.css?v=e25746554d" data-rui-css>
+  <link rel="stylesheet" href="ui/rui-gen.css?v=53239f1df8" data-rui-css>
+  <link rel="stylesheet" href="ui/rui-map.css?v=28677b9600" data-rui-css>
+  <script src="ui/rui-theme.js?v=db9539abb3"></script>
+  <script src="ui/rui-app.js?v=5f6636c213"></script>
+  <script>
+    /* 페인트 전에 저장된 표시 설정(테마/다크/글자크기) + 시스템 브랜딩 적용 — 깜빡임 방지.
+       이 인라인 스크립트는 api.js 로드 전에 실행되므로 예외적으로 localStorage 를 직접 읽는다
+       (새 키 study.display 우선, 없으면 구키 study_display 폴백 — api.js 가 이후 이관).
+       사용자가 아직 표시 설정을 고르지 않았으면 시스템 기본값(study.system.defaults)을 쓴다. */
+    (function () {
+      var sys = {};
+      try { sys = JSON.parse(localStorage.getItem("study.system") || "{}") || {}; } catch (e) { sys = {}; }
+      try {
+        var raw = localStorage.getItem("study.display") || localStorage.getItem("study_display") || "null";
+        var d = JSON.parse(raw) || (sys.defaults || {});   // 저장된 값 없으면 시스템 기본값
+        var r = document.documentElement;
+        if (d.theme) r.setAttribute("data-theme", d.theme);
+        if (d.mode) r.setAttribute("data-mode", d.mode);
+        if (d.fontscale) r.setAttribute("data-fontscale", d.fontscale);
+        if (d.layout) r.setAttribute("data-layout", d.layout);
+        var L = r.getAttribute("data-layout");   // 새 화면 틀(shell.js) 묶음 — 첫 페인트부터 클래식 메뉴가 안 보이게
+        if (L === "app" || L === "apptop") r.setAttribute("data-shell", "app"); else if (L === "command") r.setAttribute("data-shell", "command"); else r.removeAttribute("data-shell");
+        var W = function (v) { return v === "short" || v === "mid" ? v : "wide"; };
+        r.setAttribute("data-width", W(d.width));
+        // 탑메뉴 폭 — 따로 저장한 값이 없으면(예전 설정) 내용 폭을 따른다
+        r.setAttribute("data-barwidth", W(d.barwidth || d.width));
+        r.setAttribute("data-font", d.font === "system" ? "system" : "pretendard");
+        if (window.RUIAPP) RUIAPP.remember({ theme: r.getAttribute("data-theme"), mode: r.getAttribute("data-mode"), layout: r.getAttribute("data-layout") });
+      } catch (e) { /* 기본값 유지 */ }
+      try { if (window.RUIAPP) RUIAPP.enforce(); } catch (e) { /* 이전 테마로 연다 */ }
+      // 브랜딩(타이틀/파비콘)도 페인트 전에 반영 — 탭 제목·아이콘 깜빡임 방지.
+      try {
+        var b = sys.branding || {};
+        if (b.title) document.title = b.title;
+        var icon = b.favicon_image || (b.favicon_emoji || b.logo_emoji
+          ? "data:image/svg+xml," + encodeURIComponent(
+              "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='.9em' font-size='54'>" +
+              (b.favicon_emoji || b.logo_emoji) + "</text></svg>")
+          : "");
+        var link = document.getElementById("faviconLink");
+        if (icon && link) link.setAttribute("href", icon);
+      } catch (e) { /* 기본 파비콘 유지 */ }
+    })();
+  </script>
+</head>
+<body class="booting">
+  <div id="bootSplash" role="status" aria-label="불러오는 중"><span class="boot-spin"></span><p class="boot-msg">시간이 오래 걸리고 있어요.</p><button type="button" class="boot-re" onclick="location.reload()">새로 고침</button></div>
+  <!-- ===== 아이콘 스프라이트 =====
+       메뉴·그룹 제목에 쓰는 단색 선 아이콘. 24×24 격자, stroke=currentColor 라
+       테마 색을 그대로 따라간다(이모지와 달리 크기·색·굵기가 균일하다).
+       쓰는 법: <svg class="nav-ico"><use href="#i-home"></use></svg>
+  -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <g id="ic-base" fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round"></g>
+    </defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.6 12 4l8 6.6V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M8.5 17.5 5 20.5V7.5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2z"/><path d="M9 10h6M9 13h4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5.5 5.5a2 2 0 0 1 2-2H18v14H7.5a2 2 0 0 0-2 2z"/><path d="M5.5 19.5a2 2 0 0 1 2-2H18v3H7.5a2 2 0 0 1-2-1z"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="m4 20 .9-3.7L15.6 5.7a1.7 1.7 0 0 1 2.4 0l1.2 1.2a1.7 1.7 0 0 1 0 2.4L8.5 19.8z"/><path d="m14.4 7 2.6 2.6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.2 3 5.5 14h5.6l-.9 7 7.9-11h-5.7z"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1z"/></symbol>
+    <symbol id="i-bookopen" viewBox="0 0 24 24"><path d="M12 7.2C10.4 5.9 8.4 5.2 6 5.2H3.8v13.1H6c2.4 0 4.4.7 6 2 1.6-1.3 3.6-2 6-2h2.2V5.2H18c-2.4 0-4.4.7-6 2z"/><path d="M12 7.2v13.1"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20.2h4L19.2 9a2.1 2.1 0 0 0-3-3L5 17.2z"/><path d="m15 6.2 3 3"/><path d="M4 20.2h16"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M4 7.2a2 2 0 0 1 2-2h3.2l2 2.6H18a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-language" viewBox="0 0 24 24"><path d="M4 6.5h9"/><path d="M8.5 4.5v2c0 4-2.2 6.8-4.5 8"/><path d="M6 11.5c0 1.9 2 3.8 4.8 4.8"/><path d="m12.8 20.5 4-9 4 9"/><path d="M14.4 17.3h4.8"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><circle cx="4.6" cy="6.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="4.6" cy="12" r="1.1" fill="currentColor" stroke="none"/><circle cx="4.6" cy="17.5" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v2.5M8.5 20.5h7"/></symbol>
+    <symbol id="i-paper" viewBox="0 0 24 24"><path d="M7 3.5h7.5l4 4V20a.5.5 0 0 1-.5.5H7a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z"/><path d="M14.5 3.5v4h4"/><path d="M9 11.5h6M9 14.5h6M9 17.5h3.5"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.2 3.5h5.6"/><path d="M10.2 3.5v6.2L5.4 18a2 2 0 0 0 1.7 3h9.8a2 2 0 0 0 1.7-3l-4.8-8.3V3.5"/><path d="M7.7 15.2h8.6"/></symbol>
+    <symbol id="i-sword" viewBox="0 0 24 24"><path d="M14.4 17.4 3.5 6.5v-3h3l10.9 10.9"/><path d="m12.8 19 6.2-6.2"/><path d="m15.8 16 4.7 4.7"/><path d="M6.5 14.5 3.5 17.5l3 3 3-3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19.5h16"/><path d="M7 16.5v-5M12 16.5v-9M17 16.5v-6.5"/></symbol>
+    <symbol id="i-diamond" viewBox="0 0 24 24"><path d="m12 3.5 8.5 6L12 20.5 3.5 9.5z"/><path d="M3.5 9.5h17"/><path d="m8.4 9.5 3.6 11 3.6-11-3.6-6z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.6 7.5h12.8l-1 12.5a1 1 0 0 1-1 .9H7.6a1 1 0 0 1-1-.9z"/><path d="M9 7.5a3 3 0 0 1 6 0"/></symbol>
+    <symbol id="i-subject" viewBox="0 0 24 24"><path d="M5 5.2a2 2 0 0 1 2-2h8.5v12H7a2 2 0 0 0-2 2z"/><path d="M5 17.2a2 2 0 0 1 2-2h8.5v3.6H7a2 2 0 0 1-2-1.6z"/><circle cx="17.6" cy="16.6" r="2.6"/><path d="M17.6 12.6v1.2M17.6 19.4v1.2M21.4 16.6h-1.2M15 16.6h-1.2"/></symbol>
+    <symbol id="i-library" viewBox="0 0 24 24"><path d="M4 4.5h4.2v15H4zM10 4.5h4.2v15H10z"/><path d="m16.6 5.3 3.6 1-3.4 13.4-3.6-1z"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13.5 4.5H19.5V10.5"/><path d="M19.5 4.5 11 13"/><path d="M18 14.5v4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6h4"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.2 13.7 9l5.8 1.7-5.8 1.7L12 18.2 10.3 12.4 4.5 10.7 10.3 9z"/><path d="M18.5 3.5v3M20 5h-3"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3.2v2.1M12 18.7v2.1M20.8 12h-2.1M5.3 12H3.2M18.2 5.8l-1.5 1.5M7.3 16.7l-1.5 1.5M18.2 18.2l-1.5-1.5M7.3 7.3 5.8 5.8"/></symbol>
+    <symbol id="i-board" viewBox="0 0 24 24"><rect x="3.2" y="4" width="17.6" height="11" rx="1.6"/><path d="M12 15v4"/><path d="M8.5 20h7"/><path d="M7.5 8.5h6M7.5 11h4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.4 5.2 5.9V12c0 4.2 2.9 7.6 6.8 9 3.9-1.4 6.8-4.8 6.8-9V5.9z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7.5h8M16.5 7.5H20M4 16.5h3.5M12 16.5h8"/><circle cx="14.2" cy="7.5" r="2.2"/><circle cx="9.7" cy="16.5" r="2.2"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 3.5 8.5 4.2L12 12 3.5 7.7z"/><path d="m3.5 12 8.5 4.2L20.5 12"/><path d="m3.5 16.3 8.5 4.2 8.5-4.2"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="m12 4.2 9 4-9 4-9-4z"/><path d="M7 10.6v4.6c0 1.6 2.2 2.8 5 2.8s5-1.2 5-2.8v-4.6"/><path d="M21 8.2v5"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20.2 4v4.2H16"/></symbol>
+    <symbol id="i-clipcheck" viewBox="0 0 24 24"><path d="M9.2 3.6h5.6v2.8H9.2z"/><path d="M14.8 5h2.2a1.6 1.6 0 0 1 1.6 1.6v12.8a1.6 1.6 0 0 1-1.6 1.6H7a1.6 1.6 0 0 1-1.6-1.6V6.6A1.6 1.6 0 0 1 7 5h2.2"/><path d="m9.4 13.4 2 2 3.4-3.6"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m14.5 5.5-7 6.5 7 6.5"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9.5 5.5 7 6.5-7 6.5"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24"><rect x="3" y="7.8" width="18" height="9.4" rx="3.4"/><path d="M8 11.4v3.2M6.4 13h3.2"/><circle cx="15.8" cy="12.2" r="1" fill="currentColor" stroke="none"/><circle cx="17.8" cy="14.4" r="1" fill="currentColor" stroke="none"/></symbol>
+  </svg>
+  <!-- ===== 로그인 / 회원가입 (비로그인 시 앱 위를 덮음) ===== -->
+  <div class="auth-screen hidden" id="authScreen">
+    <!-- (v148) G16 공통 로그인 화면 — RUI.login 이 그린다(새 테마). 아래 auth-card 는 '이전 테마' 전용 -->
+    <div class="rui auth-rui" id="authRui"></div>
+    <div class="auth-card" role="dialog" aria-modal="true" aria-label="로그인">
+      <div class="auth-brand"><span class="auth-mark" id="authMark">📘</span><span id="authBrandText">ScholarFlow</span></div>
+      <h1 class="auth-title" id="authTitle">로그인</h1>
+      <p class="auth-sub" id="authSub">계정으로 로그인하세요.</p>
+
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tab active" data-authtab="login" role="tab">로그인</button>
+        <button class="auth-tab" data-authtab="register" role="tab">회원가입</button>
+      </div>
+
+      <form class="auth-form" id="authForm" autocomplete="on">
+        <label class="auth-label" for="authUser">아이디</label>
+        <input class="auth-input" id="authUser" type="text" name="username"
+               autocomplete="username" autocapitalize="none" spellcheck="false"
+               placeholder="아이디를 입력하세요">
+        <label class="auth-label" for="authPass">비밀번호</label>
+        <input class="auth-input" id="authPass" type="password" name="password"
+               autocomplete="current-password" placeholder="비밀번호를 입력하세요">
+        <div class="auth-msg hidden" id="authMsg"></div>
+        <button class="primary big-btn auth-submit" id="authSubmit" type="submit">로그인</button>
+      </form>
+      <div class="auth-sso hidden" id="authSso">
+        <p class="auth-or"><span>또는</span></p>
+        <a class="big-btn ghost-btn auth-sso-btn" id="authSsoBtn" href="/sso/start">통합로그인으로 계속</a>
+        <p class="auth-sso-note hidden" id="authSsoNote"></p>
+      </div>
+
+      <p class="auth-admin-note hidden" id="authAdminNote"></p>
+      <!-- (v93) 백엔드 전용: 서버(serve.py)가 없으면 로그인할 수 없다 -->
+      <p class="auth-server-down hidden" id="authServerDown" role="alert">
+        ⚠ ScholarFlow 서버에 연결할 수 없어요.<br>
+        서버(<code>python serve.py</code>)를 켠 뒤 이 페이지를 새로고침하세요.
+      </p>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <!-- ===== 사이드바 ===== -->
+    <div class="scrim" id="scrim"></div>
+    <aside class="sidebar" id="sidebar" aria-label="주요 메뉴">
+      <div class="brand">
+        <span class="brand-mark" id="brandMark">📘</span>
+        <span class="brand-text">
+          <span class="brand-name" id="brandName">ScholarFlow</span>
+          <span class="brand-sub" id="brandSub"></span>
+        </span>
+      </div>
+      <nav class="side-nav" id="sideNav">
+        <div class="nav-group">
+          <button class="nav-item" data-nav="library">
+            <svg class="nav-ico" aria-hidden="true"><use href="#i-library"></use></svg><span class="nav-text">학습 자료</span>
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <button class="nav-item" data-nav="help"><svg class="nav-ico" aria-hidden="true"><use href="#i-book"></use></svg><span class="nav-text">도움말</span></button>
+          <button class="nav-item" data-nav="settings">
+            <svg class="nav-ico" aria-hidden="true"><use href="#i-gear"></use></svg><span class="nav-text">설정</span>
+          </button>
+        </div>
+
+        <div class="nav-group hidden" id="adminNavGroup">
+          <p class="nav-heading">관리자</p>
+          <div class="nav-sub">
+          <button class="nav-item" data-nav="sysconfig">
+            <svg class="nav-ico" aria-hidden="true"><use href="#i-sliders"></use></svg><span class="nav-text">시스템 설정</span>
+          </button>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- ===== 메인 컬럼 ===== -->
+    <div class="main-col">
+      <header class="topbar" data-rui-topbar>
+        <button class="icon-btn hamburger" id="hamburger" aria-label="메뉴 열기">☰</button>
+        <h1 class="view-title" id="viewTitle"></h1>
+                <span class="resume-note hidden" id="resumeNote" aria-live="polite"></span>
+        <div class="top-right" id="topRight">
+          <!-- 상태칩·시계는 바에 상시 노출(접히지 않음). 계정 뱃지만 드롭다운 트리거. -->
+          <!-- 상태칩: ● 상태 · 접속모드 · 모델명 — 누르면 [설정 → AI 연결]로 이동 -->
+          <button class="status" id="statusPill" data-nav="settings" title="AI 서버 상태 (눌러서 AI 연결 설정)">
+            <span class="dot" id="statusDot"></span>
+            <span id="statusText">확인 중…</span>
+            <span class="st-sep" aria-hidden="true">·</span>
+            <span class="st-mode" id="statusMode">local</span>
+            <span class="st-sep" aria-hidden="true">·</span>
+            <span class="st-model" id="statusModel">모델 없음</span>
+          </button>
+          <!-- 시계: 고정폭 숫자라 초가 바뀌어도 폭이 흔들리지 않는다 -->
+          <time class="clock-pill" id="clockPill" aria-label="현재 시각">--:--:--</time>
+          <!-- 화면 모드·폭 토글: 계정 뱃지와 같은 높이·모양의 바 버튼 -->
+          <button class="bar-toggle" id="darkToggle" aria-label="화면 모드 전환">
+            <span class="tgl-ico">🌙</span><span class="tgl-txt">라이트 모드</span>
+          </button>
+          <button class="bar-toggle" id="widthToggle" aria-label="화면 폭 전환">
+            <span class="tgl-ico">⇥</span><span class="tgl-txt">숏 모드</span>
+          </button>
+          <!-- 계정 뱃지는 바에 남고, 나머지는 acct-menu 하나의 패널로 묶인다(탑메뉴 드롭다운) -->
+          <div class="user-chip" id="userChip" data-rui-me hidden>
+            <span class="user-ava" id="userAva" aria-hidden="true">🙂</span>
+            <span class="user-name" id="userName">사용자</span>
+            <span class="user-role hidden" id="userRole">사용자</span>
+          </div>
+          <!-- (v92) 계정 메뉴: 프로필 · 수치(이름+설명) · 계정 화면 바로 가기 · 로그아웃. 링크는 account.js 가 그린다 -->
+          <div class="acct-menu" id="acctMenu">
+            <div class="acm-head" id="acmHead"><span class="acm-ava" id="acmAva" aria-hidden="true">?</span><div class="acm-who"><b id="acmName">사용자</b><small id="acmSub"></small></div></div>
+            <div class="acm-meta" id="acmMeta"></div>
+            <nav class="acm-links" id="acmLinks" aria-label="계정 메뉴"></nav>
+            <button class="acct-logout" id="logoutBtn" aria-label="로그아웃" title="로그아웃">로그아웃</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- ===== 홈(대시보드 placeholder) ===== -->
+
+        
+        <!-- ===== 통계(학습 분석) ===== -->
+
+        
+        
+        
+        
+        
+        
+        
+                
+
+        
+        
+        <!-- ===== 설정 ===== -->
+
+        
+                <!-- ===== 학습 자료 라이브러리 =====
+             문서는 저마다 완결된 단일 HTML 이라 iframe 으로 띄운다. 앱 CSS 와
+             섞이지 않고, 같은 출처라 화면 도우미가 본문을 읽어 갈 수 있다. -->
+        <section id="libraryArea" class="hidden">
+                    <div id="libBrowse" class="lib2">
+            <aside class="lib2-facets" id="libFacetPanel" aria-label="학습 자료 필터"></aside>
+            <div class="lib2-main">
+              <div class="card lib2-head">
+                <div class="lib2-head-top">
+                  <h2>학습 자료</h2>
+                  <span class="lib-count" id="libCount">불러오는 중…</span>
+                  <div class="lib2-tools">
+                    <label class="lib2-sort">정렬 <select id="libSort"></select></label>
+                    <div class="seg lib-view-seg" id="libViewSeg" role="group" aria-label="보기 방식">
+                      <button type="button" class="seg-btn" data-libview="list">목록</button>
+                      <button type="button" class="seg-btn" data-libview="card">카드</button>
+                      <button type="button" class="seg-btn" data-libview="tree">트리</button>
+                    </div>
+                    <button type="button" class="ghost-btn small-btn" id="libSelectBtn" title="여러 자료 고르기">☑ 선택</button>
+                    <button type="button" class="ghost-btn small-btn hidden" id="libUploadBtn" title="HTML 학습 자료 등록(관리자)">⬆ 자료 등록</button>
+                    <button type="button" class="ghost-btn small-btn" id="libFacetToggle" title="필터 패널 열고 닫기">⚲ 필터</button>
+                  </div>
+                </div>
+                <input type="search" id="libSearch" class="lib-search" placeholder="제목·요약·태그·id 검색   ( / 키로 바로 )" autocomplete="off">
+                <div class="lib2-active" id="libActive"></div>
+              </div>
+              <div id="libShelves" class="lib2-shelves"></div>
+              <div class="lib-list" id="libList"></div>
+              <p class="lib-empty hidden" id="libEmpty">조건에 맞는 자료가 없어요.</p>
+              <div class="lib2-selbar hidden" id="libSelBar"></div>
+            </div>
+          </div>
+
+          <div id="libViewer" class="hidden lib2-reader">
+            <aside class="lib2-side" id="libSide" aria-label="자료 목록">
+              <div class="lib2-side-head">
+                <input type="search" id="libSideSearch" placeholder="자료 검색" autocomplete="off">
+                <button type="button" class="icon-mini" id="libSideClose" title="목록 닫기">✕</button>
+              </div>
+              <div class="seg lib2-scope" id="libSideScope" role="tablist" aria-label="목록 범위">
+                <button type="button" class="seg-btn" data-scope="rel">관련 문서</button>
+                <button type="button" class="seg-btn" data-scope="all">전체 문서</button>
+              </div>
+              <p class="lib2-side-info" id="libSideInfo"></p>
+              <div class="lib2-side-list" id="libSideList"></div>
+            </aside>
+            <div class="lib2-pane">
+              <div class="lib-bar">
+                <button class="ghost-btn small-btn" id="libBack">← 목록</button>
+                <button class="ghost-btn small-btn" id="libSideToggle" title="자료 목록 보이기/숨기기">☰</button>
+                <div class="lib-bar-id">
+                  <b id="libDocTitle">-</b>
+                  <span id="libDocCrumb"></span>
+                </div>
+                <div class="lib2-bar-tools">
+                  <span class="lib2-prog" id="libProg" title="읽은 위치"></span>
+                  <button class="icon-mini" id="libPrev" title="이전 자료 ( [ )">‹</button>
+                  <button class="icon-mini" id="libNext" title="다음 자료 ( ] )">›</button>
+                  <button class="icon-mini" id="libZoomOut" title="글자 작게">A−</button>
+                  <button class="icon-mini" id="libZoomIn" title="글자 크게">A+</button>
+                  <button class="icon-mini lib2-toc-btn" id="libTocToggle" title="목차 패널 보이기/숨기기">목차</button>
+                  <button class="icon-mini" id="libLayoutBtn" title="보기 방식 · 본문 폭">▤</button>
+                  <button class="icon-mini" id="libFav" title="즐겨찾기">☆</button>
+                  <button class="icon-mini" id="libPrint" title="인쇄 / PDF">⎙</button>
+                  <a class="lib-ext" id="libOpenNew" href="#" target="_blank" rel="noopener" title="새 탭에서 열기">
+                    <svg aria-hidden="true"><use href="#i-external"></use></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="lib2-layoutpop hidden" id="libLayoutPop"></div>
+              <iframe id="libFrame" class="lib-frame" title="학습 자료" src="about:blank"></iframe>
+            </div>
+            <aside class="lib2-toc" id="libToc" aria-label="이 문서 목차">
+              <div class="lib2-toc-head">
+                <b>목차</b><span class="lib2-toc-count" id="libTocCount"></span>
+                <button type="button" class="icon-mini" id="libTocClose" title="목차 닫기">✕</button>
+              </div>
+              <nav class="lib2-toc-list" id="libTocList"></nav>
+            </aside>
+          </div>
+        </section>
+
+
+        <section id="settingsArea" class="hidden">
+          <div class="card set-card">
+            <h2>설정</h2>
+
+
+            <div class="set-block">
+              <h3 class="set-h3">표시</h3>
+              <div class="rui rui-embed" id="ruiSettings"></div>
+              <div class="set-row rui-legacy-only">
+                <span class="set-label">테마</span>
+                <div class="seg th-grid" id="setThemeSeg">
+                  <div class="th-group"><p>화이트 · 클린</p><div class="th-row">
+                    <button class="seg-btn th-card" data-theme="white" title="클린 화이트"><span class="th-prev" aria-hidden="true"><span style="background:#ffffff"><i style="background:#111827"></i><i style="background:#5b6472"></i><i style="background:#2563eb"></i></span><span style="background:#0d1117"><i style="background:#e6edf3"></i><i style="background:#9aa4b2"></i><i style="background:#58a6ff"></i></span></span><b>클린 화이트</b></button>
+                    <button class="seg-btn th-card" data-theme="snow" title="스노우"><span class="th-prev" aria-hidden="true"><span style="background:#f8fafc"><i style="background:#0f172a"></i><i style="background:#556070"></i><i style="background:#4f46e5"></i></span><span style="background:#0b1020"><i style="background:#e8ecf8"></i><i style="background:#9aa3c2"></i><i style="background:#8b93ff"></i></span></span><b>스노우</b></button>
+                    <button class="seg-btn th-card" data-theme="mono" title="모노"><span class="th-prev" aria-hidden="true"><span style="background:#ffffff"><i style="background:#09090b"></i><i style="background:#52525b"></i><i style="background:#18181b"></i></span><span style="background:#09090b"><i style="background:#fafafa"></i><i style="background:#a1a1aa"></i><i style="background:#f4f4f5"></i></span></span><b>모노</b></button>
+                    <button class="seg-btn th-card" data-theme="linen" title="린넨"><span class="th-prev" aria-hidden="true"><span style="background:#fbfaf7"><i style="background:#23201b"></i><i style="background:#645d52"></i><i style="background:#b4532a"></i></span><span style="background:#161411"><i style="background:#efe9df"></i><i style="background:#b0a796"></i><i style="background:#e08a5d"></i></span></span><b>린넨</b></button>
+                  </div></div>
+                  <div class="th-group"><p>파스텔 · 소프트</p><div class="th-row">
+                    <button class="seg-btn th-card" data-theme="lavender" title="라벤더"><span class="th-prev" aria-hidden="true"><span style="background:#fbfaff"><i style="background:#1f1b33"></i><i style="background:#625d7d"></i><i style="background:#7c5cdb"></i></span><span style="background:#121020"><i style="background:#ece9fb"></i><i style="background:#a8a2c8"></i><i style="background:#a594f9"></i></span></span><b>라벤더</b></button>
+                    <button class="seg-btn th-card" data-theme="peach" title="피치"><span class="th-prev" aria-hidden="true"><span style="background:#fffaf8"><i style="background:#2b1d18"></i><i style="background:#6e5a52"></i><i style="background:#e0603f"></i></span><span style="background:#1a1210"><i style="background:#f6e7e1"></i><i style="background:#c2a59a"></i><i style="background:#ff8f73"></i></span></span><b>피치</b></button>
+                    <button class="seg-btn th-card" data-theme="rose" title="로즈"><span class="th-prev" aria-hidden="true"><span style="background:#fdf4f6"><i style="background:#3a1d26"></i><i style="background:#80586a"></i><i style="background:#d6336c"></i></span><span style="background:#1c1015"><i style="background:#f8e6ec"></i><i style="background:#c49aa8"></i><i style="background:#f472a6"></i></span></span><b>로즈</b></button>
+                    <button class="seg-btn th-card" data-theme="mint" title="민트"><span class="th-prev" aria-hidden="true"><span style="background:#f0faf6"><i style="background:#12302a"></i><i style="background:#4f6d63"></i><i style="background:#0c8060"></i></span><span style="background:#0b1714"><i style="background:#dcf2ea"></i><i style="background:#8fb3a7"></i><i style="background:#34d3a4"></i></span></span><b>민트</b></button>
+                    <button class="seg-btn th-card" data-theme="sky" title="스카이"><span class="th-prev" aria-hidden="true"><span style="background:#f2f8fd"><i style="background:#102a43"></i><i style="background:#4f6478"></i><i style="background:#1977cc"></i></span><span style="background:#0b1622"><i style="background:#dbeafb"></i><i style="background:#8ca7c2"></i><i style="background:#5ab0ff"></i></span></span><b>스카이</b></button>
+                  </div></div>
+                  <div class="th-group"><p>포인트 컬러</p><div class="th-row">
+                    <button class="seg-btn th-card" data-theme="cobalt" title="코발트"><span class="th-prev" aria-hidden="true"><span style="background:#f9fbff"><i style="background:#0b1b3a"></i><i style="background:#4e5d78"></i><i style="background:#1e4fd8"></i></span><span style="background:#081022"><i style="background:#dfe8fb"></i><i style="background:#93a3c6"></i><i style="background:#5b8cff"></i></span></span><b>코발트</b></button>
+                    <button class="seg-btn th-card" data-theme="emerald" title="에메랄드"><span class="th-prev" aria-hidden="true"><span style="background:#fafdfb"><i style="background:#10241b"></i><i style="background:#52665c"></i><i style="background:#059669"></i></span><span style="background:#0a1511"><i style="background:#ddf1e8"></i><i style="background:#8fb3a3"></i><i style="background:#34d399"></i></span></span><b>에메랄드</b></button>
+                    <button class="seg-btn th-card" data-theme="amber" title="앰버"><span class="th-prev" aria-hidden="true"><span style="background:#fffdf7"><i style="background:#2a2112"></i><i style="background:#6b5d42"></i><i style="background:#c27c0e"></i></span><span style="background:#15120a"><i style="background:#f4ead2"></i><i style="background:#b8aa86"></i><i style="background:#f5b544"></i></span></span><b>앰버</b></button>
+                    <button class="seg-btn th-card" data-theme="cherry" title="체리"><span class="th-prev" aria-hidden="true"><span style="background:#fffafb"><i style="background:#2a1418"></i><i style="background:#6e5559"></i><i style="background:#d0284a"></i></span><span style="background:#1a0e11"><i style="background:#f8e4e8"></i><i style="background:#c49aa3"></i><i style="background:#ff5c7a"></i></span></span><b>체리</b></button>
+                    <button class="seg-btn th-card" data-theme="sunset" title="선셋"><span class="th-prev" aria-hidden="true"><span style="background:#fdf3ec"><i style="background:#34211a"></i><i style="background:#7f6255"></i><i style="background:#c0522c"></i></span><span style="background:#1f130d"><i style="background:#f3e2d8"></i><i style="background:#bb9a89"></i><i style="background:#ff8a5c"></i></span></span><b>선셋</b></button>
+                    <button class="seg-btn th-card" data-theme="forest" title="포레스트"><span class="th-prev" aria-hidden="true"><span style="background:#f1f5ec"><i style="background:#1c2a17"></i><i style="background:#5b6b4f"></i><i style="background:#3a843a"></i></span><span style="background:#0f150c"><i style="background:#e2ecd8"></i><i style="background:#97a888"></i><i style="background:#6cc46c"></i></span></span><b>포레스트</b></button>
+                    <button class="seg-btn th-card" data-theme="deepocean" title="딥오션"><span class="th-prev" aria-hidden="true"><span style="background:#eef4f6"><i style="background:#10242e"></i><i style="background:#4f6c77"></i><i style="background:#0c7f92"></i></span><span style="background:#071820"><i style="background:#dceaef"></i><i style="background:#85a3ad"></i><i style="background:#2bc4dc"></i></span></span><b>딥오션</b></button>
+                  </div></div>
+                  <div class="th-group"><p>차분 · 프로</p><div class="th-row">
+                    <button class="seg-btn th-card" data-theme="dashboard" title="대시보드"><span class="th-prev" aria-hidden="true"><span style="background:#f4f6fb"><i style="background:#1a2233"></i><i style="background:#606c84"></i><i style="background:#3457d5"></i></span><span style="background:#0f141c"><i style="background:#e6ecf5"></i><i style="background:#97a4ba"></i><i style="background:#5b7cff"></i></span></span><b>대시보드</b></button>
+                    <button class="seg-btn th-card" data-theme="slate" title="슬레이트"><span class="th-prev" aria-hidden="true"><span style="background:#f5f6f8"><i style="background:#1f2329"></i><i style="background:#5c6470"></i><i style="background:#4f46e5"></i></span><span style="background:#111317"><i style="background:#e6e8ec"></i><i style="background:#9aa1ad"></i><i style="background:#818cf8"></i></span></span><b>슬레이트</b></button>
+                    <button class="seg-btn th-card" data-theme="nord" title="노르드"><span class="th-prev" aria-hidden="true"><span style="background:#eceff4"><i style="background:#2e3440"></i><i style="background:#556074"></i><i style="background:#57779f"></i></span><span style="background:#242933"><i style="background:#eceff4"></i><i style="background:#a7b0c2"></i><i style="background:#88c0d0"></i></span></span><b>노르드</b></button>
+                    <button class="seg-btn th-card" data-theme="projectboard" title="프로보드"><span class="th-prev" aria-hidden="true"><span style="background:#f4f5f7"><i style="background:#172b4d"></i><i style="background:#5a687f"></i><i style="background:#0052cc"></i></span><span style="background:#0e1421"><i style="background:#e4e9f2"></i><i style="background:#97a3ba"></i><i style="background:#4c9aff"></i></span></span><b>프로보드</b></button>
+                    <button class="seg-btn th-card" data-theme="solarized" title="솔라라이즈드"><span class="th-prev" aria-hidden="true"><span style="background:#fdf6e3"><i style="background:#073642"></i><i style="background:#4f6369"></i><i style="background:#2076b2"></i></span><span style="background:#002b36"><i style="background:#eee8d5"></i><i style="background:#9facac"></i><i style="background:#2aa1e8"></i></span></span><b>솔라라이즈드</b></button>
+                    <button class="seg-btn th-card" data-theme="coffee" title="커피"><span class="th-prev" aria-hidden="true"><span style="background:#f6f1e7"><i style="background:#2f241b"></i><i style="background:#6f604f"></i><i style="background:#9c5a2c"></i></span><span style="background:#17120e"><i style="background:#f0e6d8"></i><i style="background:#b5a28c"></i><i style="background:#d9965b"></i></span></span><b>커피</b></button>
+                  </div></div>
+                  <div class="th-group"><p>다크 감성 · 특수</p><div class="th-row">
+                    <button class="seg-btn th-card" data-theme="opsdark" title="운영 다크"><span class="th-prev" aria-hidden="true"><span style="background:#eef2f9"><i style="background:#0f1830"></i><i style="background:#566784"></i><i style="background:#027ab7"></i></span><span style="background:#0a0e1a"><i style="background:#e8eef9"></i><i style="background:#8fa0bf"></i><i style="background:#38bdf8"></i></span></span><b>운영 다크</b></button>
+                    <button class="seg-btn th-card" data-theme="playful" title="플레이풀"><span class="th-prev" aria-hidden="true"><span style="background:#f6f2ff"><i style="background:#241a3a"></i><i style="background:#706687"></i><i style="background:#7c3aed"></i></span><span style="background:#150f22"><i style="background:#f0eafb"></i><i style="background:#a99cc4"></i><i style="background:#a78bfa"></i></span></span><b>플레이풀</b></button>
+                    <button class="seg-btn th-card" data-theme="contrast" title="고대비"><span class="th-prev" aria-hidden="true"><span style="background:#ffffff"><i style="background:#000000"></i><i style="background:#2b2b2b"></i><i style="background:#0040c1"></i></span><span style="background:#000000"><i style="background:#ffffff"></i><i style="background:#d6d6d6"></i><i style="background:#ffd60a"></i></span></span><b>고대비</b></button>
+                  </div></div>
+                </div>
+              </div>
+              <div class="set-row rui-legacy-only">
+                <span class="set-label">화면 모드</span>
+                <div class="seg" id="setModeSeg">
+                  <button class="seg-btn" data-md="light">라이트</button>
+                  <button class="seg-btn" data-md="dark">다크</button>
+                </div>
+              </div>
+              <div class="set-row">
+                <span class="set-label">글꼴<br><span class="set-desc" style="margin:0">테마는 색만 바꿔요. 글꼴과 크기는 여기서 고릅니다</span></span>
+                <div class="seg" id="setFontFamSeg">
+                  <button class="seg-btn" data-ff="pretendard">프리텐다드</button>
+                  <button class="seg-btn" data-ff="system">기본(맑은 고딕)</button>
+                </div>
+              </div>
+              <div class="set-row">
+                <span class="set-label">글자 크기</span>
+                <div class="seg" id="setFontSeg">
+                  <button class="seg-btn" data-fs="normal">보통</button>
+                  <button class="seg-btn" data-fs="large">크게</button>
+                  <button class="seg-btn" data-fs="xlarge">아주 크게</button>
+                </div>
+              </div>
+              <div class="set-row rui-legacy-only">
+                <span class="set-label">화면 레이아웃<br><span class="set-desc" style="margin:0">학습 앱형 = 화면을 앱처럼 꺼낸 메뉴(왼쪽 또는 위) + 오늘의 학습 + 오른쪽 AI 패널(기본) · 커맨드 센터형 = 탐색 트리 + 탭 + 오른쪽 모델 패널 · 클래식 = 예전 사이드바/탑메뉴. 어디서나 Ctrl+K 로 메뉴·명령 검색</span></span>
+                <div class="seg" id="setLayoutSeg">
+                  <button class="seg-btn" data-lay="app">학습 앱형 · 왼쪽 메뉴</button>
+                  <button class="seg-btn" data-lay="apptop">학습 앱형 · 위 메뉴</button>
+                  <button class="seg-btn" data-lay="command">커맨드 센터형</button>
+                  <button class="seg-btn" data-lay="sidebar">클래식 사이드바</button>
+                  <button class="seg-btn" data-lay="topnav">클래식 탑메뉴</button>
+                </div>
+              </div>
+              <div class="set-row">
+                <span class="set-label">내용 폭<br><span class="set-desc" style="margin:0">와이드는 화면을 꽉 채우고, 중간은 1480px, 일반은 읽기 좋은 폭으로 가운데 정렬해요</span></span>
+                <div class="seg" id="setWidthSeg">
+                  <button class="seg-btn" data-wd="wide">와이드</button>
+                  <button class="seg-btn" data-wd="mid">중간</button>
+                  <button class="seg-btn" data-wd="short">일반</button>
+                </div>
+              </div>
+              <div class="set-row">
+                <span class="set-label">탑메뉴 폭<br><span class="set-desc" style="margin:0">와이드는 상단 바가 화면 양끝까지, 중간은 1480px 열에, 일반은 본문 폭에 맞춰요(일반에서는 AI 상태를 짧게)</span></span>
+                <div class="seg" id="setBarWidthSeg">
+                  <button class="seg-btn" data-bw="wide">와이드</button>
+                  <button class="seg-btn" data-bw="mid">중간</button>
+                  <button class="seg-btn" data-bw="short">일반</button>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="set-block">
+              <h3 class="set-h3" id="setLlmH">AI 연결</h3>
+              <p class="set-desc" id="llmStateLine">AI 서버에 연결되어 있지 않아요. 아래에서 LLM 프로필을 불러와 연결하면 AI 기능을 쓸 수 있어요.</p>
+              <div class="llm-tools">
+                <label class="big-btn ghost-btn" for="llmFile">📂 프로필 불러오기(JSON)</label>
+                <input type="file" id="llmFile" accept="application/json,.json" class="hidden">
+                <button class="big-btn ghost-btn" id="llmDisconnect">연결 끊기</button>
+              </div>
+              <div id="llmList" class="llm-list"></div>
+              <p class="set-warn" id="llmKeyWarn">🔒 연결 정보는 <b>계정마다 따로</b> 저장돼요 — 같은 브라우저의 다른 계정은 볼 수 없어요. 다만 API 키는 이 브라우저에 평문으로 있으니 공용 PC에서는 사용 후 연결을 끊고 프로필을 지우세요.</p>
+              <div class="llm-vault" id="llmVault">
+                <h4>☁ 내 계정 보관함 — 올리기 · 받아 쓰기</h4>
+                <p class="set-desc">연결 정보를 <b>계정 이름 + 암호 문구</b>로 잠가 올려 두면, 다른 브라우저(같은 서버 주소로 연 경우)에서 같은 이름의 계정으로 로그인한 뒤 [받아 쓰기] 한 번으로 바로 연결돼요. DB 없이 이 PC 의 폴더(<code>userdata/llm-vault</code>)에 <b>암호문만</b> 저장해요 — 서버·관리자·다른 계정은 내용을 볼 수 없고, 암호 문구를 잊으면 복구할 수 없어요.</p>
+                <p class="vault-where" id="llmVaultWhere"></p>
+                <div class="llm-tools">
+                  <input type="password" id="llmVaultPass" placeholder="암호 문구(6자 이상)" autocomplete="new-password" style="min-width:220px">
+                  <button class="big-btn ghost-btn" id="llmVaultUp" type="button">⬆ 올리기</button>
+                  <button class="big-btn primary" id="llmVaultDown" type="button">⬇ 받아 쓰기</button>
+                </div>
+                <div class="llm-tools">
+                  <button class="small-btn ghost-btn" id="llmVaultExport" type="button">🔐 암호화 파일로 저장</button>
+                  <label class="small-btn ghost-btn" for="llmVaultImportFile">📂 암호화 파일에서 받아 쓰기</label>
+                  <input type="file" id="llmVaultImportFile" accept="application/json,.json" class="hidden">
+                  <button class="small-btn ghost-btn" id="llmVaultFile" type="button">💾 평문 파일로 저장(키 포함)</button>
+                  <button class="small-btn danger-btn" id="llmVaultDel" type="button">보관함 비우기</button>
+                </div>
+                <p class="vault-meta" id="llmVaultMeta"></p>
+              </div>
+              <p class="data-tools-msg" id="llmMsg"></p>
+            </div>
+
+            <div class="set-block">
+              <h3 class="set-h3">고급 (LLM)</h3>
+              <div class="set-row"><span class="set-label">모델</span><span class="set-val" id="advModel">-</span></div>
+              <div class="set-row"><span class="set-label">temperature</span><span class="set-val" id="advTemp">-</span></div>
+              <p class="set-warn hidden" id="advKeyWarn"></p>
+            </div>
+          </div>
+        </section>
+
+                
+
+        
+        <!-- ===== 관리자 패널 (admin 전용) ===== -->
+
+        <!-- ===== 시스템 설정 (admin 전용 · 화이트라벨/메뉴 구성) ===== -->
+        <section id="sysArea" class="hidden">
+          <div class="card hidden error-card" id="sysDenied">
+            <p class="big">관리자만 접근할 수 있는 화면이에요.</p>
+          </div>
+
+          <div id="sysBody">
+            <div class="card set-card">
+              <h2>시스템 설정</h2>
+              <p class="set-desc">앱 이름·로고·파비콘·메뉴 구성을 코드 수정 없이 바꿔요.
+                여기 설정은 <b>이 앱 전체(모든 사용자)</b>에 적용되고 관리자만 바꿀 수 있어요.</p>
+
+              <div class="set-block">
+                <h3 class="set-h3">브랜딩</h3>
+                <div class="set-row">
+                  <span class="set-label">앱 이름<br><span class="set-desc" style="margin:0">비우면 ScholarFlow 를 써요</span></span>
+                  <input type="text" id="sysTitle" class="set-text" maxlength="40" placeholder="예: 우리학원 스마트 학습">
+                </div>
+                <div class="set-row">
+                  <span class="set-label">슬로건(부제)</span>
+                  <input type="text" id="sysSubtitle" class="set-text" maxlength="60" placeholder="예: 우리 연구실 자료 허브">
+                </div>
+                <div class="set-row">
+                  <span class="set-label">로고 이모지</span>
+                  <input type="text" id="sysLogoEmoji" class="set-text sys-emoji" maxlength="4" placeholder="📘">
+                </div>
+                <div class="set-row">
+                  <span class="set-label">로고 이미지<br><span class="set-desc" style="margin:0">올리면 이모지 대신 이미지가 보여요(약 300KB 이하)</span></span>
+                  <div class="sys-upload">
+                    <span class="sys-preview" id="sysLogoPreview" aria-hidden="true"></span>
+                    <button class="ghost-btn" id="sysLogoPick" type="button">이미지 선택</button>
+                    <button class="ghost-btn" id="sysLogoClear" type="button">이미지 지우기</button>
+                    <input type="file" id="sysLogoFile" accept="image/*" hidden>
+                  </div>
+                </div>
+                <div class="set-row">
+                  <span class="set-label">파비콘 이모지<br><span class="set-desc" style="margin:0">비우면 로고 이모지를 써요</span></span>
+                  <input type="text" id="sysFavEmoji" class="set-text sys-emoji" maxlength="4" placeholder="(로고와 동일)">
+                </div>
+                <div class="set-row">
+                  <span class="set-label">파비콘 이미지</span>
+                  <div class="sys-upload">
+                    <span class="sys-preview" id="sysFavPreview" aria-hidden="true"></span>
+                    <button class="ghost-btn" id="sysFavPick" type="button">이미지 선택</button>
+                    <button class="ghost-btn" id="sysFavClear" type="button">이미지 지우기</button>
+                    <input type="file" id="sysFavFile" accept="image/*" hidden>
+                  </div>
+                </div>
+              </div>
+
+              <div class="set-block">
+                <h3 class="set-h3">메뉴 관리</h3>
+                <p class="set-desc">순서를 바꾸거나(▲▼) 개별 메뉴를 꺼요. 끈 메뉴는 내비에서 사라지고,
+                  주소로 직접 들어가도 홈으로 보내요. 홈·관리자·시스템 설정은 항상 켜져 있어요.<br>
+                  메뉴는 <b>그룹(자료·설정·관리자)별로 묶여</b> 표시되고, ▲▼ 순서는 같은 그룹 안에서 적용돼요.
+                  다른 자리로 옮기고 싶으면 그룹을 바꾸세요(‘(맨 위)’는 제목 없이 맨 위, ‘(기타)’는 제목 없이 아래쪽).</p>
+                <div class="sys-menu-list" id="sysMenuList"></div>
+              </div>
+
+              <div class="set-block">
+                <h3 class="set-h3">신규 사용자 기본값</h3>
+                <p class="set-desc">아직 표시 설정을 고르지 않은 사용자에게 적용되는 첫 화면 모양이에요.</p>
+                <div class="set-row">
+                  <span class="set-label">기본 테마</span>
+                  <select id="sysDefTheme" class="set-select">
+                    <option value="white">클린 화이트</option>
+                    <option value="snow">스노우</option>
+                    <option value="mono">모노</option>
+                    <option value="linen">린넨</option>
+                    <option value="lavender">라벤더</option>
+                    <option value="peach">피치</option>
+                    <option value="rose">로즈</option>
+                    <option value="mint">민트</option>
+                    <option value="sky">스카이</option>
+                    <option value="cobalt">코발트</option>
+                    <option value="emerald">에메랄드</option>
+                    <option value="amber">앰버</option>
+                    <option value="cherry">체리</option>
+                    <option value="sunset">선셋</option>
+                    <option value="forest">포레스트</option>
+                    <option value="deepocean">딥오션</option>
+                    <option value="dashboard">대시보드</option>
+                    <option value="slate">슬레이트</option>
+                    <option value="nord">노르드</option>
+                    <option value="projectboard">프로보드</option>
+                    <option value="solarized">솔라라이즈드</option>
+                    <option value="coffee">커피</option>
+                    <option value="opsdark">운영 다크</option>
+                    <option value="playful">플레이풀</option>
+                    <option value="contrast">고대비</option>
+                  </select>
+                </div>
+                <div class="set-row">
+                  <span class="set-label">기본 화면 모드</span>
+                  <select id="sysDefMode" class="set-select">
+                    <option value="light">라이트</option>
+                    <option value="dark">다크</option>
+                  </select>
+                </div>
+                <div class="set-row">
+                  <span class="set-label">기본 글자 크기</span>
+                  <select id="sysDefFont" class="set-select">
+                    <option value="normal">보통</option>
+                    <option value="large">크게</option>
+                    <option value="xlarge">아주 크게</option>
+                  </select>
+                </div>
+                <div class="set-row">
+                  <span class="set-label">기본 메뉴 레이아웃</span>
+                  <select id="sysDefLayout" class="set-select">
+                    <option value="app">학습 앱형 · 왼쪽 메뉴</option>
+                    <option value="apptop">학습 앱형 · 위 메뉴</option>
+                    <option value="command">커맨드 센터형</option>
+                    <option value="sidebar">클래식 사이드바</option>
+                    <option value="topnav">클래식 탑메뉴</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="set-block">
+                <h3 class="set-h3">앱 전역 스위치</h3>
+                <div class="set-row">
+                  <span class="set-label">감사 기록 수집<br><span class="set-desc" style="margin:0">끄면 이 브라우저의 화면 열기·설정 변경 기록이 쌓이지 않아요(서버 감사 기록은 그대로)</span></span>
+                  <div class="seg" id="sysFeatAudit">
+                    <button class="seg-btn" data-on="1" type="button">켜기</button>
+                    <button class="seg-btn" data-on="0" type="button">끄기</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="primary big-btn" id="sysSave" type="button">시스템 설정 저장</button>
+                <button class="ghost-btn big-btn" id="sysReload" type="button">편집 취소(다시 불러오기)</button>
+                <button class="danger-btn big-btn" id="sysReset" type="button">기본값으로 복원</button>
+              </div>
+              <p class="data-tools-msg" id="sysMsg"></p>
+            </div>
+          </div>
+        </section>
+
+              </main>
+    </div>
+  </div>
+
+  <!-- ===== 온보딩(첫 실행) ===== -->
+
+  
+    <button class="ask-fab" id="askFab" aria-expanded="false" aria-controls="askPanel"
+          title="이 화면에 대해 물어보기 (Alt+A)">
+    <svg class="ask-fab-ico" aria-hidden="true"><use href="#i-spark"></use></svg>
+    <span class="ask-fab-txt">물어보기</span>
+  </button>
+
+  <aside class="ask-panel" id="askPanel" aria-label="화면 도우미">
+    <div class="ask-head">
+      <div class="ask-title">
+        <svg class="ask-head-ico" aria-hidden="true"><use href="#i-spark"></use></svg>
+        <b>물어보기</b>
+        <span class="ask-where" id="askWhere"></span>
+      </div>
+      <div class="ask-head-acts">
+        <button type="button" class="ask-icon" id="askClear" title="대화 지우기">🧹</button>
+        <button type="button" class="ask-icon" id="askClose" title="닫기 (Esc)">
+          <svg class="ask-x" aria-hidden="true"><use href="#i-x"></use></svg>
+        </button>
+      </div>
+    </div>
+    <div class="ask-log" id="askLog" aria-live="polite"></div>
+    <div class="ask-quick" id="askQuick"></div>
+    <div class="ask-input">
+      <textarea id="askInput" rows="1" placeholder="이 화면에 대해 물어보세요 (Enter 전송)"></textarea>
+      <button class="primary" id="askSend">보내기</button>
+    </div>
+  </aside>
+
+  <script src="config.js?v=6f1ff17470"></script>
+  <script src="api.js?v=e13b3a0811"></script>
+  <script src="emergency.js?v=82e2300dbc"></script>
+  <script src="server.js?v=296a20e649"></script>
+  <script src="account.js?v=8091dbbdab"></script>
+      <script src="app.js?v=3d6da949e9"></script>
+  <script src="library.js?v=1fda7a3dcf"></script>
+  <script src="maker.js?v=f959695744"></script>
+  <script src="shell.js?v=0489f8fbae"></script>
+  <script src="reader.js?v=5e57b4818a"></script>
+  <script src="rnd.js?v=0bdbb0135b"></script>
+  <script src="docview.js?v=ef6bacd580"></script>
+  <script src="rndread.js?v=a2de3c353c"></script>
+  <script src="toolkit.js?v=a908e96c4a"></script>
+  <script src="rndlink.js?v=6c669d0b30"></script>
+  <script src="toolsets.js?v=895b14c37b"></script>
+  <script src="toolsets2.js?v=3b6b1a571c"></script>
+  <script src="toolsets3.js?v=5db12f1ffa"></script>
+  <script src="hubs.js?v=d715143e86"></script>
+  <script src="papertpl.js?v=18b832dfd5"></script>
+  <script src="paperkit.js?v=961de909cf"></script>
+  <script src="paper.js?v=6ab18e7f61"></script>
+  <script src="projinfo.js?v=c8cfe98d16"></script>
+  <script src="reporttpl.js?v=9e1b243339"></script>
+  <script src="report.js?v=2c0a91dc4c"></script>
+  <script src="litlab.js?v=4e1310037b"></script>
+  <script src="mockreview.js?v=98d6406560"></script>
+  <script src="slidekit.js?v=5356a96e88"></script>
+  <script src="slidestudio.js?v=d2d357cf53"></script>
+  <script src="deepmeet.js?v=f0e7b854ae"></script>
+  <script src="libstudio.js?v=8419b7a585"></script>
+  <script src="ui/listview.js?v=0f3e3203b6"></script>
+  <script src="dashboard.js?v=690c6b968b"></script>
+  <script src="aitasks.js?v=7e982bebfd"></script>
+  <script src="hublink.js?v=08a508f6a1"></script>
+  <script src="modepages.js?v=b430f62cc9"></script>
+</body>
+</html>

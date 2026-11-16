@@ -1,0 +1,66 @@
+{
+ "schema": "library-catalog/1.0",
+ "generated": "2026-11-16",
+ "count": 2,
+ "taxonomy": {
+  "guide": {
+   "label": "가이드",
+   "tracks": {
+    "start": {
+     "label": "시작하기",
+     "topics": {
+      "scholarflow": "ScholarFlow"
+     }
+    },
+    "research": {
+     "label": "연구 방법",
+     "topics": {
+      "lab-notes": "연구 노트"
+     }
+    }
+   }
+  }
+ },
+ "subjects": [],
+ "docs": [
+  {
+   "schema": "lds/1.0",
+   "id": "guide-research-lab-notes-good-research-notes",
+   "title": "연구 노트 잘 쓰는 법 — 나중의 나를 위한 기록",
+   "summary": "재현할 수 있는 연구 노트의 기본 구조, 날마다 남길 것, 흔한 실수와 점검표.",
+   "domain": "guide",
+   "track": "research",
+   "topic": "lab-notes",
+   "level": "beginner",
+   "minutes": 12,
+   "tags": [
+    "연구 노트",
+    "재현성",
+    "기록"
+   ],
+   "status": "published",
+   "updated": "2026-11-16",
+   "path": "library/docs/guide-research-lab-notes-good-research-notes.html",
+   "bytes": 8203
+  },
+  {
+   "schema": "lds/1.0",
+   "id": "guide-start-scholarflow-getting-started",
+   "title": "ScholarFlow 시작하기 — 첫 30분 안내",
+   "summary": "서버를 켜고, AI 를 연결하고, 첫 연구 프로젝트와 첫 학습 자료를 열어 보는 순서.",
+   "domain": "guide",
+   "track": "start",
+   "topic": "scholarflow",
+   "level": "beginner",
+   "minutes": 10,
+   "tags": [
+    "scholarflow",
+    "시작하기"
+   ],
+   "status": "published",
+   "updated": "2026-11-16",
+   "path": "library/docs/guide-start-scholarflow-getting-started.html",
+   "bytes": 8282
+  }
+ ]
+}
